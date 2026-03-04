@@ -1,0 +1,147 @@
+.heroContainer {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 0 4rem;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+    z-index: 1;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    gap: 4rem;
+    margin-top: 4rem;
+}
+
+.heroLeft {
+    flex: 1;
+    max-width: 600px;
+}
+
+.heroTitle {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.heroSubhead {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #e2e8f0;
+    line-height: 1.4;
+}
+
+.heroRight {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.heroText {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.heroButtons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btnPrimary {
+    background-color: #ff4757;
+    /* Match pinkish red */
+    color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btnPrimary:hover {
+    opacity: 0.9;
+}
+
+.btnSecondary {
+    background-color: white;
+    color: #ff4757;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btnSecondary:hover {
+    opacity: 0.9;
+}
+
+.whatsappFloat {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.whatsappFloat:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+    .heroContent {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroContainer {
+        padding: 0 2rem;
+    }
+
+    .heroTitle {
+        font-size: 3rem;
+    }
+}

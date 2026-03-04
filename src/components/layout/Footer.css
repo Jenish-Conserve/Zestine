@@ -1,0 +1,294 @@
+.footer-container {
+    position: relative;
+    width: 100%;
+    color: #fff;
+    padding: 6rem 4rem 4rem 4rem;
+    /* Reverting bottom padding to match reduced empty space requirement */
+    /* Top padding spacing to allow overlapping sections */
+    font-family: 'Inter', sans-serif;
+}
+
+/* Base structural pattern overlaid on color */
+.footer-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    /* Subtle blend */
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Embedded giant watermark text effect behind content */
+.footer-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(8rem, 20vw, 24rem);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.03);
+    /* Barely visible */
+    z-index: 1;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: -3px;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    /* Sits above the watermark and pattern */
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+    gap: 2rem;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Brand details */
+.footer-logo {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo img {
+    height: 48px;
+    object-fit: contain;
+}
+
+.footer-description {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    max-width: 320px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.footer-socials a {
+    color: #cbd5e1;
+    font-size: 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.footer-socials a:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Nav Headers & Columns */
+.footer-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.footer-heading-underline {
+    width: 40px;
+    height: 2px;
+    background-color: #3b82f6;
+    /* Accent blue matching Zestine potentially */
+    margin-bottom: 1.5rem;
+}
+
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 300;
+    transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+    color: #fff;
+}
+
+/* Lists and Icon arrangements */
+.footer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    /* Offset for missing underline on these columns per design */
+}
+
+.footer-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+.footer-icon {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.footer-action-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
+    /* Reduced internal padding to make it smaller/thinner */
+    display: flex;
+    justify-content: flex-start;
+    gap: 6rem;
+    /* Scaled down gap proportionally */
+    align-items: center;
+    backdrop-filter: blur(8px);
+}
+
+.action-col h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.action-col p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.action-col.flex-row {
+    display: flex;
+    gap: 6rem;
+    /* Spacing between Email and Phone Number */
+}
+
+.action-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.action-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #cbd5e1;
+}
+
+.action-value {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+/* Custom Out-of-bounds Top Scroll Arrow making a continuous border dome */
+.scroll-to-top {
+    position: absolute;
+    top: -35px;
+    /* Offset upward more for increased height */
+    right: 4rem;
+    background-color: #002145;
+    color: #fff;
+    width: 60px;
+    height: 35px;
+    /* Increased height to make it taller than a perfect half-circle */
+    border: 2px solid #0ea5e9;
+    border-bottom: none;
+    /* Open to the footer */
+    border-top-left-radius: 40px;
+    /* Slightly tighter pill radius */
+    border-top-right-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* Align to the bottom edge */
+    padding-bottom: 2px;
+    /* Pull arrow significantly down closer to the line */
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: none;
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+/* Kill the jagged Batman ears completely */
+.scroll-to-top::before,
+.scroll-to-top::after {
+    display: none;
+}
+
+.scroll-to-top:hover {
+    color: #3b82f6;
+}
+
+/* Responsive Mapping */
+@media (max-width: 1200px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 3rem;
+    }
+
+    .brand-col {
+        grid-column: 1 / -1;
+        /* spans full width */
+    }
+}
+
+@media (max-width: 900px) {
+    .footer-action-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 4rem 2rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .action-col.flex-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .scroll-to-top {
+        right: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}

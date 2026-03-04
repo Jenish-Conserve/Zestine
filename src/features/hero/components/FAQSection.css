@@ -1,0 +1,197 @@
+.faq-container {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 6rem 4rem;
+    font-family: 'Inter', sans-serif;
+    color: #1e293b;
+}
+
+.faq-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+/* LEFT SIDE - FAQ List */
+.faq-left {
+    display: flex;
+    flex-direction: column;
+    padding-right: 2rem;
+}
+
+.faq-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 2.5rem;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.faq-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.75rem;
+    /* Smoother, squatter text box */
+    background-color: #ffffff;
+    border-radius: 30px;
+    /* Extremely pill-shaped curve */
+    border: none;
+    border-left: 5px solid #004e98;
+    /* Left border traces the curve flawlessly */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* Soft drop shadow */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.faq-question {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #475569;
+}
+
+.faq-icon {
+    font-size: 1.25rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* RIGHT SIDE - Contact Form */
+.faq-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contact-form-card {
+    width: 100%;
+    max-width: 550px;
+    background-color: #1e4066;
+    /* Match the dark oceanic blue card */
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.form-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #f8fafc;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.08);
+    /* Semi-transparent inputs */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+/* Subtle inner shadow effect on inputs matching the design */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.contact-form textarea {
+    resize: none;
+}
+
+.form-submit-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    /* Aligns button to right */
+    margin-top: 0.5rem;
+}
+
+.form-submit-btn {
+    background-color: #fff;
+    color: #ef4444;
+    /* The bright red text inside button */
+    border: none;
+    border-radius: 8px;
+    padding: 0.875rem 2.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-submit-btn:hover {
+    background-color: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .faq-content {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .faq-left {
+        padding-right: 0;
+    }
+
+    .faq-right {
+        justify-content: center;
+    }
+
+    .contact-form-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .faq-container {
+        padding: 4rem 2rem;
+    }
+
+    .faq-title {
+        font-size: 2rem;
+    }
+
+    .contact-form-card {
+        padding: 2rem;
+    }
+}
