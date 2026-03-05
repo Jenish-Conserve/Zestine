@@ -1,0 +1,247 @@
+/* ============================================
+   PRODUCTS SECTION
+   ============================================ */
+
+/* Outer: sets scroll length. Next section is pushed down by this height. */
+.ps-scroll-wrapper {
+    position: relative;
+    width: 100%;
+    /* height is set inline = PRODUCTS.length × 100vh */
+}
+
+/* Inner: sticks to the top of the viewport while wrapper scrolls */
+.ps-sticky-pane {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: #f0f4f8;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    /* tabs on top, cards below */
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 3rem 5rem;
+    /* top/bottom breathing room */
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    overflow: hidden;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+/* ── Tabs ── */
+.ps-tabs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    /* don't compress the tab row */
+    z-index: 20;
+    position: relative;
+}
+
+.ps-tab {
+    background: transparent;
+    border: 1.5px solid transparent;
+    /* default: invisible border */
+    border-radius: 10px;
+    padding: 0.55rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #6b7280;
+    cursor: default;
+    /* not clickable — GSAP drives it */
+    transition: border-color 0.3s ease, color 0.3s ease, font-weight 0.15s ease;
+}
+
+.ps-tab--active {
+    font-weight: 600;
+}
+
+/* ── Card Layout ── */
+.ps-cards-container {
+    position: relative;
+    width: calc(100% - 10rem);
+    max-width: 1350px;
+    height: calc(100vh - 11rem);
+    /* viewport minus padding (6rem) + tabs + gap */
+    margin: 0 auto;
+    flex-shrink: 0;
+}
+
+.ps-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    padding: 4rem 5rem;
+    overflow: hidden;
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    will-change: transform, opacity;
+}
+
+/* ── Custom Card Z Background ── */
+.ps-card-bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    /* stretch full height of card */
+    width: 60%;
+    /* cover right side */
+    object-fit: cover;
+    /* fill space without stretching */
+    object-position: right center;
+    /* anchor to right edge */
+    z-index: 0;
+    pointer-events: none;
+    /* opacity controlled per-card via inline filter style */
+}
+
+/* ── Top row ── */
+.ps-card-top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.ps-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+}
+
+.ps-logo {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ── Product name ── */
+.ps-product-name {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin: 0.5rem 0 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+/* ── Bottom row ── */
+.ps-card-bottom {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+    padding-top: 2rem;
+    gap: 2rem;
+}
+
+.ps-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    max-width: 450px;
+}
+
+.ps-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.ps-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 8px;
+    padding: 0.8rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: fit-content;
+    margin-top: 1rem;
+}
+
+.ps-download-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+/* ── Tilted image ── */
+.ps-image-wrap {
+    flex-shrink: 0;
+    width: 320px;
+    /* increased width */
+    height: 270px;
+    /* keep height */
+    transform: translateY(-30px) rotate(5deg);
+    /* move up slightly */
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+    border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.ps-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .ps-cards-container {
+        height: auto;
+        min-height: 700px;
+    }
+
+    .ps-section {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .ps-card-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ps-image-wrap {
+        width: 100%;
+        height: 220px;
+        transform: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .ps-card {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .ps-product-name {
+        font-size: 2.5rem;
+    }
+
+    .ps-cards-container {
+        min-height: 600px;
+    }
+}

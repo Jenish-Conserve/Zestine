@@ -1,0 +1,145 @@
+.ds-section {
+    background-color: #0c3866;
+    /* Match the dark blue background from the screenshot */
+    color: #ffffff;
+    padding: 6rem 2rem;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional subtle Zestine watermark (using a large letter Z or similar behind the cards) */
+.ds-section::before {
+    content: "Zestine";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ds-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ds-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 4rem;
+}
+
+/* Container for the cards to allow horizontal overflow or wrapping depending on screen size */
+.ds-cards-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    /* Space for scrollbar if needed */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.ds-cards-wrapper::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.ds-cards-track {
+    display: flex;
+    justify-content: flex-start;
+    /* Important for marquee */
+    gap: 1.5rem;
+    padding: 0.5rem;
+    min-width: max-content;
+    animation: scrollMarquee 30s linear infinite;
+}
+
+.ds-cards-wrapper:hover .ds-cards-track {
+    animation-play-state: paused;
+}
+
+@keyframes scrollMarquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        /* Translate left by half the track's total width plus half the gap 
+           Wait, if we render exactly 2 sets wrapped in their own flex containers, 
+           we translate one container.
+           Let's just translate -50%.
+        */
+        transform: translateX(calc(-50% - 0.75rem));
+    }
+}
+
+.ds-card {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.ds-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.ds-card-value {
+    font-size: 2.5rem;
+    font-weight: 400;
+    /* Regular weight for numbers */
+    margin: 0 0 0.75rem 0;
+}
+
+.ds-card-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media (max-width: 1200px) {
+    .ds-cards-track {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .ds-section {
+        padding: 4rem 1rem;
+    }
+
+    .ds-title {
+        font-size: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .ds-card {
+        width: 150px;
+        height: 150px;
+    }
+
+    .ds-card-value {
+        font-size: 2rem;
+    }
+}

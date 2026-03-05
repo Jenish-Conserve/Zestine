@@ -9,7 +9,8 @@
     color: #fff;
     overflow: hidden;
     font-family: 'Inter', sans-serif;
-    padding: 8rem 0;
+    padding: 5rem 0;
+    /* Reduced from 8rem */
 }
 
 /* Giant watermark background text */
@@ -35,7 +36,8 @@
     position: relative;
     z-index: 2;
     text-align: center;
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
+    /* Reduced from 6rem */
     padding: 0 4rem;
 }
 
@@ -77,10 +79,13 @@
    ============================================ */
 .wwa-intro {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
+    grid-template-columns: 45% 55%;
+    /* Slightly wider text column */
+    gap: 4rem;
+    /* Tighter gap */
     align-items: center;
-    margin-bottom: 8rem;
+    margin-bottom: 5rem;
+    /* Reduced from 8rem */
 }
 
 .wwa-image-frame {
@@ -89,7 +94,10 @@
     overflow: hidden;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    aspect-ratio: 4 / 3;
+    min-height: 420px;
+    /* Enforce a minimum visible height */
+    height: 100%;
+    /* Fill parent column height */
     flex-shrink: 0;
 }
 
@@ -97,9 +105,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
     filter: brightness(0.95);
     transition: transform 0.6s ease;
+    position: absolute;
+    inset: 0;
+    /* Makes the image fill the frame absolutely */
 }
 
 .wwa-image-frame:hover img {
@@ -140,9 +152,10 @@
 }
 
 .wwa-tagline {
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    /* Scaled down from 2.8rem */
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.3;
     color: #fff;
     margin: 0;
 }
@@ -170,7 +183,8 @@
    STORY BLOCKS (Centered columns)
    ============================================ */
 .wwa-story-section {
-    margin-bottom: 8rem;
+    margin-bottom: 5rem;
+    /* Reduced from 8rem */
 }
 
 .wwa-story-section-label {
@@ -254,10 +268,12 @@
    ============================================ */
 .wwa-pivot {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
+    grid-template-columns: 55% 45%;
+    gap: 4rem;
+    /* Tighter gap */
     align-items: center;
-    margin-bottom: 8rem;
+    margin-bottom: 5rem;
+    /* Reduced from 8rem */
 }
 
 .wwa-pivot-image {
@@ -317,7 +333,8 @@
    ============================================ */
 .wwa-closing {
     text-align: center;
-    padding: 6rem 4rem;
+    padding: 4rem 3rem;
+    /* Reduced from 6rem 4rem */
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 24px;

@@ -1,17 +1,18 @@
 .faq-container {
     width: 100%;
     background-color: #ffffff;
-    padding: 6rem 4rem;
+    padding: 6rem 6rem;
     font-family: 'Inter', sans-serif;
     color: #1e293b;
 }
 
 .faq-content {
-    max-width: 1440px;
-    margin: 0 auto;
+    width: 100%;
+    /* Full site width — no max-width cap */
+    margin: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 2rem;
     align-items: start;
 }
 

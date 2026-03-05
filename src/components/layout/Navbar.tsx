@@ -14,7 +14,7 @@ export default function Navbar() {
             top: 0,
             left: 0,
             zIndex: 50,
-            background: 'transparent'
+            background: 'grey'
         }}>
             <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <img src={logoImg} alt="Zestine Logo" style={{ height: '40px', objectFit: 'contain' }} />
