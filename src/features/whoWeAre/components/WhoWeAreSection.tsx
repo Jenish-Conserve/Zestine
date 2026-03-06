@@ -1,153 +1,109 @@
 import { useRef } from 'react';
+import blueprintImg from '../../../Images/who are we/Rectangle 7.png';
+import buildingImg from '../../../Images/who are we/Rectangle 8.png';
+import successImg from '../../../Images/who are we/Rectangle 9.png';
 import { useWhoWeAreAnimation } from '../hooks/useWhoWeAreAnimation';
-import blueprintImg from '../../../Images/who are we/Blueprint.png';
-import buildingImg from '../../../Images/who are we/1003825_OIU9MP1 1.png';
 import './WhoWeAre.css';
 
 export function WhoWeAreSection() {
     const sectionRef = useRef<HTMLElement>(null);
-    const titleRef = useRef<HTMLHeadingElement>(null);
-    const badgeRef = useRef<HTMLSpanElement>(null);
-    const introRef = useRef<HTMLDivElement>(null);
-    const imageOneRef = useRef<HTMLDivElement>(null);
-    const imageTwoRef = useRef<HTMLDivElement>(null);
-    const storyBlocksRef = useRef<(HTMLDivElement | null)[]>([]);
-    const pillarsRef = useRef<HTMLDivElement>(null);
-    const closingRef = useRef<HTMLDivElement>(null);
+    const pinContainerRef = useRef<HTMLDivElement>(null);
+
+    // Arrays for refs
+    const imagesRef = useRef<(HTMLDivElement | null)[]>([]);
+    const textsRef = useRef<(HTMLDivElement | null)[]>([]);
 
     useWhoWeAreAnimation({
         sectionRef,
-        titleRef,
-        badgeRef,
-        introRef,
-        imageOneRef,
-        imageTwoRef,
-        storyBlocksRef,
-        pillarsRef,
-        closingRef,
+        pinContainerRef,
+        imagesRef,
+        textsRef,
     });
 
+    // Helper for ref assignment to satisfy valid return type
+    const assignImageRef = (index: number) => (el: HTMLDivElement | null) => {
+        imagesRef.current[index] = el;
+    };
+    const assignTextRef = (index: number) => (el: HTMLDivElement | null) => {
+        textsRef.current[index] = el;
+    };
+
     return (
-        <section className="wwa-section" ref={sectionRef}>
-            {/* Giant watermark background text */}
-            <span className="wwa-bg-word" aria-hidden="true">ZESTINE</span>
+        <section className="wwa-section" id="who-we-are" ref={sectionRef}>
+            <div className="wwa-pin-container" ref={pinContainerRef}>
+                <div className="wwa-bg-word" aria-hidden="true">ZESTINE</div>
 
-            {/* ─── HEADER ─── */}
-            <header className="wwa-header">
-                <span className="wwa-badge" ref={badgeRef}>Who We Are</span>
-                <h2 className="wwa-title" ref={titleRef}>
-                    Born in Engineering.<br />Built for Operations.
-                </h2>
-            </header>
+                <div className="wwa-container">
+                    <header className="wwa-header">
+                        <h2 className="wwa-main-title">Who We Are</h2>
+                    </header>
 
-            <div className="wwa-container">
+                    <div className="wwa-content-grid">
 
-                {/* ─── INTRO: Blueprint image + Origin story ─── */}
-                <div className="wwa-intro" ref={introRef}>
-                    {/* Image left */}
-                    <div className="wwa-image-frame" ref={imageOneRef}>
-                        <img src={blueprintImg} alt="Engineering blueprint" />
-                    </div>
-
-                    {/* Text right */}
-                    <div className="wwa-intro-text">
-                        <div className="wwa-divider" />
-                        <h3 className="wwa-tagline">
-                            Zestine was built by professionals who lived those{' '}
-                            <span className="highlight">workflows first.</span>
-                        </h3>
-                        <p className="wwa-body-text">
-                            It started inside an engineering office where highly capable teams were
-                            still caught in manual coordination, disconnected data, and repetitive
-                            execution.
-                        </p>
-                        <p className="wwa-body-text">
-                            Despite powerful AEC tools, real-world project delivery remained slowed
-                            by workflow friction, implementation gaps, and processes that software
-                            never truly solved.
-                        </p>
-                    </div>
-                </div>
-
-                {/* ─── STORY: What slowed them down ─── */}
-                <div className="wwa-story-section">
-                    <p className="wwa-story-section-label">The Challenge</p>
-
-                    <div
-                        className="wwa-story-block"
-                        ref={(el) => { storyBlocksRef.current[0] = el; }}
-                    >
-                        <h3 className="wwa-story-headline">
-                            Despite powerful AEC tools, real-world project delivery remained slowed by:
-                        </h3>
-                    </div>
-
-                    {/* Pillars grid */}
-                    <div className="wwa-pillars" ref={pillarsRef}>
-                        {[
-                            'Workflow friction',
-                            'Implementation gaps',
-                            'Manual documentation',
-                            'Repetitive operational tasks',
-                        ].map((item) => (
-                            <div key={item} className="wwa-pillar-item">
-                                <span>{item}</span>
+                        {/* Left Column: Images (Stacked) */}
+                        <div className="wwa-image-col">
+                            <div className="wwa-image-frame" ref={assignImageRef(0)}>
+                                <img
+                                    src={blueprintImg}
+                                    alt="Engineering blueprint"
+                                />
                             </div>
-                        ))}
-                    </div>
-
-                    <div
-                        className="wwa-story-block"
-                        ref={(el) => { storyBlocksRef.current[1] = el; }}
-                    >
-                        <h3 className="wwa-story-headline">We saw a disconnect.</h3>
-                        <p className="wwa-story-body">
-                            Software was being built for engineering — without engineering.
-                        </p>
-                    </div>
-                </div>
-
-                {/* ─── PIVOT: We reversed the model ─── */}
-                <div className="wwa-pivot">
-                    {/* Left: text */}
-                    <div className="wwa-pivot-content">
-                        <p className="wwa-story-section-label">The Turning Point</p>
-
-                        <div className="wwa-quote-block">
-                            <p>"So we reversed the model."</p>
+                            <div className="wwa-image-frame" ref={assignImageRef(1)}>
+                                <img
+                                    src={buildingImg}
+                                    alt="Corporate building"
+                                />
+                            </div>
+                            <div className="wwa-image-frame" ref={assignImageRef(2)}>
+                                <img
+                                    src={successImg}
+                                    alt="Team success"
+                                />
+                            </div>
                         </div>
 
-                        <ul className="wwa-point-list">
-                            <li>Domain experts led the design.</li>
-                            <li>Technology became the accelerator.</li>
-                        </ul>
+                        {/* Right Column: Texts (Stacked) */}
+                        <div className="wwa-text-col">
+                            {/* Block 1 */}
+                            <div className="wwa-text-content wwa-stacked-text" ref={assignTextRef(0)}>
+                                <h3 className="wwa-heading">
+                                    <span className="letter-wrapper"><span className="red-circle"></span>B</span>orn in Engineering. Built<br />for Operations.
+                                </h3>
+                                <div className="wwa-paragraphs">
+                                    <p>Zestine was built by professionals who lived those workflows first.</p>
+                                    <p>It started inside an engineering office where highly capable teams were still caught in manual coordination, disconnected data, and repetitive execution.</p>
+                                </div>
+                            </div>
 
-                        <p className="wwa-body-text">
-                            What began as internal tools to reduce coordination effort quickly
-                            became adopted by BIM professionals across projects — shaping the
-                            foundation for scalable digital systems built around engineering
-                            reality.
-                        </p>
-                    </div>
+                            {/* Block 2 */}
+                            <div className="wwa-text-content wwa-stacked-text" ref={assignTextRef(1)}>
+                                <h3 className="wwa-heading">
+                                    <span className="letter-wrapper"><span className="red-circle"></span>D</span>espite powerful AEC tools, real-world project<br />delivery remained slowed by:
+                                </h3>
+                                <ul className="wwa-list">
+                                    <li><span className="letter-wrapper"><span className="red-circle small"></span>W</span>orkflow friction</li>
+                                    <li><span className="letter-wrapper"><span className="red-circle small"></span>I</span>mplementation gaps</li>
+                                    <li><span className="letter-wrapper"><span className="red-circle small"></span>M</span>anual documentation</li>
+                                </ul>
+                            </div>
 
-                    {/* Right: Building photo */}
-                    <div className="wwa-image-frame wwa-pivot-image" ref={imageTwoRef}>
-                        <img src={buildingImg} alt="Engineering building" />
+                            {/* Block 3 */}
+                            <div className="wwa-text-content wwa-stacked-text" ref={assignTextRef(2)}>
+                                <h3 className="wwa-heading">
+                                    <span className="letter-wrapper"><span className="red-circle"></span>W</span>e saw a disconnect.
+                                </h3>
+                                <div className="wwa-paragraphs spacing-sm">
+                                    <p>Software was being built for engineering - without engineering.</p>
+                                    <p>So we reversed the model.</p>
+                                    <p>Domain experts led the design.<br />Technology became the accelerator.</p>
+                                    <p>What began as internal tools to reduce coordination effort quickly became adopted by BIM professionals across projects -<br />shaping the foundation for scalable digital systems built around engineering reality.</p>
+                                    <p>Today, Zestine builds intelligent platforms that help AEC teams operate with clarity, precision, and control -<br />from model governance to data coordination.</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-                {/* ─── CLOSING STATEMENT ─── */}
-                <div className="wwa-closing" ref={closingRef}>
-                    <h3 className="wwa-closing-headline">
-                        Today, Zestine builds intelligent platforms that help AEC teams operate
-                        with clarity, precision, and control.
-                    </h3>
-                    <p className="wwa-closing-body">
-                        From model governance to data coordination — we connect the gap between
-                        engineering intent and operational reality.
-                    </p>
-                </div>
-
             </div>
         </section>
     );
