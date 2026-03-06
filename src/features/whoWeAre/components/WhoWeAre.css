@@ -129,6 +129,7 @@
     opacity: 0;
     visibility: hidden;
     will-change: opacity, transform;
+    z-index: 10;
 }
 
 .wwa-heading {
@@ -144,7 +145,6 @@
 .letter-wrapper {
     position: relative;
     display: inline-block;
-    z-index: 1;
 }
 
 .red-circle {
@@ -161,8 +161,8 @@
 }
 
 .red-circle.small {
-    width: 22px;
-    height: 22px;
+    width: 34px;
+    height: 34px;
 }
 
 /* Typography for body text */

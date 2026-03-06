@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
-import logoImg from '../../Images/logo/Group 174.png';
+import logoImg from '../../Images/logo/color-logo.png';
 
 export default function Navbar() {
     return (
@@ -14,7 +14,7 @@ export default function Navbar() {
             top: 0,
             left: 0,
             zIndex: 50,
-            background: 'grey'
+            background: 'transparent'
         }}>
             <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <img src={logoImg} alt="Zestine Logo" style={{ height: '40px', objectFit: 'contain' }} />
