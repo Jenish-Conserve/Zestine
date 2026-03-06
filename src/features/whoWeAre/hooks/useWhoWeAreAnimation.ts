@@ -43,7 +43,8 @@ export function useWhoWeAreAnimation(refs: AnimationRefs) {
                         end: '+=3000',
                         scrub: 1,
                         pin: true,
-                        anticipatePin: 1
+                        anticipatePin: 1,
+                        refreshPriority: 10 // Calculate this pin space first
                     }
                 });
 
@@ -79,7 +80,8 @@ export function useWhoWeAreAnimation(refs: AnimationRefs) {
                         end: '+=2000', // Slightly shorter duration for mobile for better scroll feel
                         scrub: 1,
                         pin: true,
-                        anticipatePin: 1
+                        anticipatePin: 1,
+                        refreshPriority: 10
                     }
                 });
 

@@ -122,6 +122,21 @@ export function ProductsSection() {
                 start: 'top top',
                 end: 'bottom bottom',
                 scrub: 1.5,
+                refreshPriority: 5, // Calculate after WhoWeAre pin space
+                onUpdate: (self) => {
+                    // There are 3 cards, so progress maps linearly:
+                    // 0.0 - 0.33 -> 0
+                    // 0.33 - 0.66 -> 1
+                    // 0.66 - 1.0 -> 2
+                    let newIndex = Math.min(
+                        cards.length - 1,
+                        Math.floor(self.progress * cards.length)
+                    );
+
+                    if (activeIndexRef.current !== newIndex) {
+                        setActiveTab(newIndex);
+                    }
+                }
             }
         });
 
@@ -143,7 +158,6 @@ export function ProductsSection() {
                 opacity: 1,
                 duration: 1,
                 ease: 'power2.inOut',
-                onStart: () => setActiveTab(index),  // switch tab when this card starts entering
             });
 
             // Previous card folds back — concurrent with incoming card
@@ -182,7 +196,11 @@ export function ProductsSection() {
                             key={prod.id}
                             ref={(el) => { if (el) tabRefs.current[i] = el; }}
                             className="ps-tab"
-                            style={{ color: '#6b7280', borderColor: 'transparent', fontWeight: '400' }}
+                            style={{
+                                color: i === 0 ? prod.tabAccent : '#6b7280',
+                                borderColor: i === 0 ? prod.tabAccent : 'transparent',
+                                fontWeight: i === 0 ? '600' : '400'
+                            }}
                         >
                             {prod.label}
                         </button>
