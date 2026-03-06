@@ -18,6 +18,8 @@ export const DeliveryStatsSection: React.FC = () => {
                     Designed for Real<br />World Delivery
                 </h2>
 
+                <div className="ds-watermark">Zestine</div>
+
                 <div className="ds-cards-wrapper">
                     <div className="ds-cards-track">
                         {/* Render the set twice for seamless infinite scrolling */}

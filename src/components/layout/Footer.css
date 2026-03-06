@@ -157,17 +157,43 @@
 }
 
 .footer-action-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 2.5rem 3rem;
-    /* Reduced internal padding to make it smaller/thinner */
+    position: relative;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    padding: 3rem 6rem;
     display: flex;
     justify-content: flex-start;
     gap: 6rem;
-    /* Scaled down gap proportionally */
     align-items: center;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.footer-action-card::before {
+    content: '';
+    position: absolute;
+    left: 4.5rem;
+    top: 0;
+    bottom: 0;
+    width: 35px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 100' preserveAspectRatio='none'%3E%3Cpolyline points='0,0 30,50 0,100' fill='none' stroke='rgba(0,0,0,0.6)' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    pointer-events: none;
+}
+
+.footer-action-card::after {
+    content: '';
+    position: absolute;
+    right: 4.5rem;
+    top: 0;
+    bottom: 0;
+    width: 35px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 100' preserveAspectRatio='none'%3E%3Cpolyline points='30,0 0,50 30,100' fill='none' stroke='rgba(0,0,0,0.6)' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    pointer-events: none;
 }
 
 .action-col h2 {

@@ -1,6 +1,5 @@
 .ts-section {
     background-color: #0c3866;
-    /* Base dark blue */
     background-size: 110% auto;
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -8,21 +7,9 @@
     padding: 10vh 2rem;
     font-family: 'Inter', sans-serif;
     position: relative;
-    z-index: 100;
-    isolation: isolate;
-    height: max(100vh, 1100px);
-    min-height: fit-content;
+    height: auto;
+    min-height: 100vh;
     overflow: hidden;
-}
-
-/* Fully opaque overlay so nothing below shows through during pinning */
-.ts-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: #0c3866;
-    background: linear-gradient(180deg, rgba(12, 56, 102, 1) 0%, rgba(8, 38, 72, 1) 100%);
-    z-index: -1;
 }
 
 .ts-container {
@@ -33,81 +20,54 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100%;
-}
-
-.ts-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 4rem;
 }
 
 .ts-cards-wrapper {
-    /* 2 cards × 220px offset + ~200px last card height + extra padding */
-    height: 850px;
-    /* Fixed height for pinned cards effect */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     width: 100%;
-    max-width: 500px;
-    /* width of cards */
+    max-width: 650px;
     position: relative;
-    /* Removed mask image to allow standard GSAP fading */
-}
-
-.ts-cards-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
 }
 
 .ts-card {
-    background-color: #514e4b;
-    /* matches the screenshot's warm dark gray */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    border: none;
-    border-radius: 16px;
-    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    position: absolute;
-    top: 0;
-    left: 0;
+    gap: 1rem;
+    position: relative;
     width: 100%;
-    will-change: transform, opacity;
-}
-
-.ts-card-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 0;
 }
 
 .ts-text {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin: 0 0 1rem 0;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .ts-author-row {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: auto;
+    margin-top: 1.5rem;
 }
 
-.ts-avatar-circle {
+.ts-avatar-img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
+    object-fit: cover;
 }
 
 .ts-author-name {
