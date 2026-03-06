@@ -43,11 +43,12 @@
     user-select: none;
 }
 
-/* Container for the cards to allow horizontal overflow or wrapping depending on screen size */
 .ds-cards-wrapper {
-    width: 100%;
+    width: auto;
+    /* Use massive negative margins and positive padding to create full bleed without vw scrollbar issues */
+    margin: 0 -50vw;
+    padding: 0 50vw 2rem 50vw;
     overflow-x: auto;
-    padding-bottom: 1rem;
     /* Space for scrollbar if needed */
     scrollbar-width: none;
     /* Firefox */
@@ -91,8 +92,8 @@
     background-color: transparent;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 12px;
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 220px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -108,14 +109,14 @@
 }
 
 .ds-card-value {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 400;
     /* Regular weight for numbers */
-    margin: 0 0 0.75rem 0;
+    margin: 0 0 1rem 0;
 }
 
 .ds-card-label {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
     line-height: 1.4;
@@ -123,7 +124,7 @@
 
 @media (max-width: 1200px) {
     .ds-cards-track {
-        padding: 0 1rem;
+        gap: 1rem;
     }
 }
 
@@ -137,12 +138,26 @@
         margin-bottom: 3rem;
     }
 
+    .ds-watermark {
+        font-size: clamp(6rem, 15vw, 12rem);
+    }
+
     .ds-card {
-        width: 150px;
-        height: 150px;
+        width: 160px;
+        height: 160px;
+        padding: 1rem;
     }
 
     .ds-card-value {
-        font-size: 2rem;
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .ds-card-label {
+        font-size: 0.85rem;
+    }
+
+    .ds-cards-wrapper {
+        padding-bottom: 1rem;
     }
 }

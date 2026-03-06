@@ -210,38 +210,79 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-    .ps-cards-container {
-        height: auto;
-        min-height: 700px;
+    .ps-sticky-pane {
+        padding: 2.5rem 2rem;
     }
 
-    .ps-section {
-        padding: 2.5rem 1.5rem;
+    .ps-cards-container {
+        width: 100%;
+        height: auto;
+        min-height: 650px;
+    }
+
+    .ps-card {
+        padding: 3rem;
     }
 
     .ps-card-bottom {
         flex-direction: column;
         align-items: flex-start;
+        gap: 1.5rem;
     }
 
     .ps-image-wrap {
         width: 100%;
+        max-width: 400px;
         height: 220px;
         transform: none;
+        align-self: center;
     }
 }
 
 @media (max-width: 600px) {
+    .ps-sticky-pane {
+        padding: 4rem 1rem 1.5rem 1rem;
+        justify-content: flex-start;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+    }
+
+    .ps-tabs {
+        gap: 0.5rem;
+    }
+
+    .ps-tab {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+    }
+
     .ps-card {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem;
         border-radius: 20px;
     }
 
     .ps-product-name {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .ps-cards-container {
-        min-height: 600px;
+        min-height: 550px;
+    }
+
+    .ps-description {
+        font-size: 0.95rem;
+    }
+
+    .ps-logo {
+        width: 45px;
+    }
+
+    .ps-image-wrap {
+        height: 180px;
+    }
+
+    .ps-download-btn {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.9rem;
     }
 }

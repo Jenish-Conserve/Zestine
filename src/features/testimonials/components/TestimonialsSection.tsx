@@ -82,6 +82,7 @@ export const TestimonialsSection: React.FC = () => {
     return (
         <section ref={sectionRef} className="ts-section" style={{ backgroundImage: `url(${bgImage})` }}>
             <div className="ts-container">
+                <h2 className="ts-title">Trusted by BIM Professionals</h2>
                 <div className="ts-cards-wrapper">
                     {TESTIMONIALS.map((item, i) => (
                         <div
