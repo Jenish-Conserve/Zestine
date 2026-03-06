@@ -54,6 +54,7 @@ export const TestimonialsSection: React.FC = () => {
                 scrub: 1, // smooth scrubbing
                 pin: true, // pin the section
                 anticipatePin: 1,
+                refreshPriority: 1 // Calculate after all upstream sections
             }
         });
 
