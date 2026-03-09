@@ -24,6 +24,14 @@
   padding: 0;
 }
 
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Nunito Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 body {
   min-height: 100vh;
   display: flex;

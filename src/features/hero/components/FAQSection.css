@@ -2,7 +2,6 @@
     width: 100%;
     background-color: #ffffff;
     padding: 6rem 6rem;
-    font-family: 'Nunito Sans', sans-serif;
     color: #1e293b;
 }
 
@@ -141,7 +140,6 @@
     padding: 1rem 1.25rem;
     color: #fff;
     font-size: 0.95rem;
-    font-family: inherit;
     transition: all 0.2s ease;
 }
 
