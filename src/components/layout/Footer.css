@@ -5,7 +5,7 @@
     padding: 6rem 4rem 4rem 4rem;
     /* Reverting bottom padding to match reduced empty space requirement */
     /* Top padding spacing to allow overlapping sections */
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 /* Base structural pattern overlaid on color */
