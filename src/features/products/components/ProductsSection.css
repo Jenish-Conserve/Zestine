@@ -54,7 +54,7 @@
     /* default: invisible border */
     border-radius: 10px;
     padding: 0.55rem 2rem;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-weight: 400;
     color: #6b7280;
     cursor: pointer;
@@ -67,6 +67,8 @@
 
 .ps-tab--active {
     font-weight: 600;
+    border: 2.5px solid #123e70;
+    color: #123e70;
 }
 
 /* ── Card Layout ── */
@@ -168,7 +170,7 @@
 }
 
 .ps-description {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     line-height: 1.8;
     margin: 0;
 }

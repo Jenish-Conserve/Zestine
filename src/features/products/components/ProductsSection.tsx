@@ -151,11 +151,11 @@ export function ProductsSection() {
         const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
         if (cards.length === 0) return;
 
-        // Stack all cards: first one visible, rest hidden below
+        // Stack all cards: first one visible, rest hidden below (slide only, no fade)
         gsap.set(cards, { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' });
         gsap.set(cards[0], { y: 0, opacity: 1, scale: 1, zIndex: 10 });
         cards.slice(1).forEach((card, i) => {
-            gsap.set(card, { y: '100%', opacity: 0, scale: 1, zIndex: 10 + i + 1 });
+            gsap.set(card, { y: '100%', opacity: 1, scale: 1, zIndex: 10 + i + 1 });
         });
 
         // Single timeline covering the entire sticky scroll range
@@ -200,19 +200,17 @@ export function ProductsSection() {
 
             const prevCard = cards[index - 1];
 
-            // ── Transition phase: plays AFTER the hold (sequential, no '<') ──
+            // ── Transition phase: incoming card slides up from below (no fade) ──
             tl.to(card, {
                 y: 0,
-                opacity: 1,
                 duration: 1,
                 ease: 'power2.inOut',
             });
 
-            // Previous card folds back — concurrent with incoming card
+            // Previous card slides up and out — concurrent with incoming card (no fade)
             tl.to(prevCard, {
-                scale: 0.92,
-                opacity: 0.6,
-                y: -60,
+                scale: 0.95,
+                y: -80,
                 duration: 1,
                 ease: 'power2.inOut',
             }, '<');

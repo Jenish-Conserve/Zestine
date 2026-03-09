@@ -29,12 +29,14 @@ export function useWhoWeAreAnimation(refs: AnimationRefs) {
             let mm = gsap.matchMedia();
 
             // ==========================================
-            // DESKTOP: Diagonal Entrance 
+            // DESKTOP: Diagonal Slide (perfected)
             // ==========================================
             mm.add("(min-width: 1025px)", () => {
-                // Setup images for desktop
-                gsap.set(images[0], { xPercent: 0, yPercent: 0, opacity: 1 });
-                gsap.set(images.slice(1), { xPercent: 100, yPercent: 100 });
+                // image[0] visible. Others start at diagonal position but INVISIBLE
+                // (autoAlpha:0 hides them so there's no peeking)
+                gsap.set(images[0], { xPercent: 0, yPercent: 0, autoAlpha: 1 });
+                gsap.set(images[1], { xPercent: 100, yPercent: 100, autoAlpha: 0 });
+                gsap.set(images[2], { xPercent: 100, yPercent: 100, autoAlpha: 0 });
 
                 const tl = gsap.timeline({
                     scrollTrigger: {
@@ -44,22 +46,24 @@ export function useWhoWeAreAnimation(refs: AnimationRefs) {
                         scrub: 1,
                         pin: true,
                         anticipatePin: 1,
-                        refreshPriority: 10 // Calculate this pin space first
+                        refreshPriority: 10
                     }
                 });
 
-                // Desktop Step 1
+                // Step 1: image[0] slides diagonally out (top-right) + fades
+                //         image[1] slides diagonally in (bottom-right → center) + fades in
                 tl.to(texts[0], { autoAlpha: 0, y: -40, duration: 1 })
-                    .to(images[0], { xPercent: 100, yPercent: -100, duration: 1 }, "<")
-                    .to(images[1], { xPercent: 0, yPercent: 0, duration: 1 }, "<")
+                    .to(images[0], { xPercent: 100, yPercent: -100, autoAlpha: 0, duration: 1 }, "<")
+                    .to(images[1], { xPercent: 0, yPercent: 0, autoAlpha: 1, duration: 1 }, "<")
                     .to(texts[1], { autoAlpha: 1, y: 0, duration: 1 }, "-=0.5");
 
                 tl.to({}, { duration: 0.5 });
 
-                // Desktop Step 2
+                // Step 2: image[1] slides diagonally out (top-right) + fades
+                //         image[2] slides diagonally in (bottom-right → center) + fades in
                 tl.to(texts[1], { autoAlpha: 0, y: -40, duration: 1 })
-                    .to(images[1], { xPercent: 100, yPercent: -100, duration: 1 }, "<")
-                    .to(images[2], { xPercent: 0, yPercent: 0, duration: 1 }, "<")
+                    .to(images[1], { xPercent: 100, yPercent: -100, autoAlpha: 0, duration: 1 }, "<")
+                    .to(images[2], { xPercent: 0, yPercent: 0, autoAlpha: 1, duration: 1 }, "<")
                     .to(texts[2], { autoAlpha: 1, y: 0, duration: 1 }, "-=0.5");
 
                 tl.to({}, { duration: 0.5 });
