@@ -36,6 +36,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 #root {
@@ -89,4 +90,21 @@ body {
 
 .btn-zestine:hover::before {
   transform: scale(10);
+}
+
+/* ============================================
+   INFINITE MOVING CARDS (Aceternity-style)
+   ============================================ */
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 0.5rem));
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }

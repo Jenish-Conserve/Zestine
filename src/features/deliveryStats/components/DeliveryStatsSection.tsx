@@ -1,16 +1,38 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './DeliveryStatsSection.css';
 
 const STATS = [
     { value: '10+', label: 'Years on AEC' },
     { value: '20+', label: 'AEC Workflow Accelerators' },
-    { value: '200+', label: 'of trusted Users' },
+    { value: '200+', label: 'Trusted Users' },
     { value: '100%', label: 'AEC-Focused' },
-    { value: '10+', label: 'Years on AEC' }, // Duplicated from screenshot
-    { value: '20+', label: 'AEC Workflow Accelerators' }
+    { value: '50+', label: 'Projects Delivered' },
+    { value: '5★', label: 'Client Satisfaction' },
 ];
 
 export const DeliveryStatsSection: React.FC = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const listRef = useRef<HTMLUListElement>(null);
+    const [started, setStarted] = useState(false);
+
+    useEffect(() => {
+        if (!containerRef.current || !listRef.current) return;
+
+        // Clone all children to create the seamless loop
+        const children = Array.from(listRef.current.children);
+        children.forEach((child) => {
+            const clone = child.cloneNode(true) as HTMLElement;
+            listRef.current!.appendChild(clone);
+        });
+
+        // Direction  → right means reverse
+        containerRef.current.style.setProperty('--animation-direction', 'reverse');
+        // Speed → slow = 80s
+        containerRef.current.style.setProperty('--animation-duration', '80s');
+
+        setStarted(true);
+    }, []);
+
     return (
         <section className="ds-section">
             <div className="ds-container">
@@ -20,22 +42,19 @@ export const DeliveryStatsSection: React.FC = () => {
 
                 <div className="ds-watermark">Zestine</div>
 
-                <div className="ds-cards-wrapper">
-                    <div className="ds-cards-track">
-                        {/* Render the set twice for seamless infinite scrolling */}
+                {/* Scroller — Aceternity mask-fade style */}
+                <div ref={containerRef} className="ds-scroller">
+                    <ul
+                        ref={listRef}
+                        className={`ds-scroller-list${started ? ' animate-scroll' : ''}`}
+                    >
                         {STATS.map((stat, i) => (
-                            <div key={`set1-${i}`} className="ds-card">
+                            <li key={i} className="ds-card">
                                 <h3 className="ds-card-value">{stat.value}</h3>
                                 <p className="ds-card-label">{stat.label}</p>
-                            </div>
+                            </li>
                         ))}
-                        {STATS.map((stat, i) => (
-                            <div key={`set2-${i}`} className="ds-card">
-                                <h3 className="ds-card-value">{stat.value}</h3>
-                                <p className="ds-card-label">{stat.label}</p>
-                            </div>
-                        ))}
-                    </div>
+                    </ul>
                 </div>
             </div>
         </section>
