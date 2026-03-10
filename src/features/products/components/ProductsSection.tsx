@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FaDownload, FaTimes, FaCheckCircle } from 'react-icons/fa';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -92,10 +92,45 @@ export function ProductsSection() {
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
     const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const activeIndexRef = useRef(0);
+    const lastScrollRef = useRef(Date.now());
     const [activeTab, setActiveTabState] = useState(0);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+
+    // Auto-advance logic
+    useEffect(() => {
+        const handleInteraction = () => {
+            lastScrollRef.current = Date.now();
+        };
+
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('mousedown', handleInteraction);
+        window.addEventListener('touchstart', handleInteraction);
+
+        const interval = setInterval(() => {
+            const now = Date.now();
+            const idleTime = now - lastScrollRef.current;
+
+            // 12 seconds of idle
+            if (idleTime >= 12000) {
+                const trigger = ScrollTrigger.getById('products-trigger');
+                if (trigger && trigger.isActive) {
+                    const nextIndex = (activeIndexRef.current + 1) % PRODUCTS.length;
+                    handleTabClick(nextIndex);
+                    // Reset timer so it doesn't immediately trigger again
+                    lastScrollRef.current = now;
+                }
+            }
+        }, 2000); // Check every 2s
+
+        return () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('mousedown', handleInteraction);
+            window.removeEventListener('touchstart', handleInteraction);
+            clearInterval(interval);
+        };
+    }, []);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -174,6 +209,7 @@ export function ProductsSection() {
 
         const tl = gsap.timeline({
             scrollTrigger: {
+                id: 'products-trigger',
                 trigger: wrapperRef.current,
                 start: 'top top',
                 end: 'bottom bottom',
@@ -246,28 +282,52 @@ export function ProductsSection() {
             <div ref={stickyRef} className="ps-sticky-pane">
                 {/* Tab row: active tab border matches the current card accent */}
                 <div className="ps-tabs">
-                    {PRODUCTS.map((prod, i) => (
-                        <div
-                            key={prod.id}
-                            className={`ps-tab-wrapper ${i !== activeTab ? 'ps-tab-hidden-mobile' : ''}`}
-                            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}
-                            onClick={() => handleTabClick(i)}
-                        >
-                            <img src={prod.tabLogo} alt="" className={`ps-tab-logo ${i !== activeTab ? 'ps-tab-logo-inactive' : ''}`} />
-                            <button
-                                ref={(el) => { if (el) tabRefs.current[i] = el; }}
-                                className="ps-tab"
+                    {PRODUCTS.map((prod, i) => {
+                        // Calculate CSS order to keep active tab in center (order 2)
+                        // This ensures that regardless of which index is active, 
+                        // it stays in the middle of the 3-tab layout.
+                        let order = 1;
+                        if (i === activeTab) {
+                            order = 2; // Middle
+                        } else if (i === (activeTab + 1) % PRODUCTS.length) {
+                            order = 3; // Right
+                        } else {
+                            order = 1; // Left
+                        }
+
+                        return (
+                            <div
+                                key={prod.id}
+                                className={`ps-tab-wrapper ${i !== activeTab ? 'ps-tab-hidden-mobile' : ''}`}
                                 style={{
-                                    color: i === activeTab ? prod.tabAccent : '#6b7280',
-                                    borderColor: i === activeTab ? prod.tabAccent : 'transparent',
-                                    fontWeight: i === activeTab ? '600' : '400',
-                                    backgroundColor: '#fff' // matches the mockup white button box
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.75rem',
+                                    cursor: 'pointer',
+                                    order: order
                                 }}
+                                onClick={() => handleTabClick(i)}
                             >
-                                {prod.label}
-                            </button>
-                        </div>
-                    ))}
+                                <img
+                                    src={prod.tabLogo}
+                                    alt=""
+                                    className={`ps-tab-logo ${i !== activeTab ? 'ps-tab-logo-inactive' : ''}`}
+                                />
+                                <button
+                                    ref={(el) => { if (el) tabRefs.current[i] = el; }}
+                                    className="ps-tab"
+                                    style={{
+                                        color: i === activeTab ? prod.tabAccent : '#6b7280',
+                                        borderColor: i === activeTab ? prod.tabAccent : 'transparent',
+                                        fontWeight: i === activeTab ? '600' : '400',
+                                        backgroundColor: '#fff'
+                                    }}
+                                >
+                                    {prod.label}
+                                </button>
+                            </div>
+                        );
+                    })}
                 </div>
                 <div className="ps-cards-container">
                     {PRODUCTS.map((p, i) => (
