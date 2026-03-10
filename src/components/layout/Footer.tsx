@@ -53,11 +53,31 @@ export function Footer() {
                         <h3 className="footer-heading">Explore</h3>
                         <div className="footer-heading-underline" />
                         <nav className="footer-nav">
-                            <Link to="/">Home</Link>
-                            <Link to="/about">About us</Link>
-                            <Link to="/who-we-are">Who We Are</Link>
-                            <Link to="/products">Products</Link>
-                            <Link to="/contact">Contact us</Link>
+                            <a href="#hero" onClick={(e) => {
+                                e.preventDefault();
+                                const el = document.getElementById('hero');
+                                if (el) gsap.to(window, { duration: 1, scrollTo: el, ease: 'power3.inOut' });
+                            }}>Home</a>
+                            <a href="#who-we-are" onClick={(e) => {
+                                e.preventDefault();
+                                const el = document.getElementById('who-we-are');
+                                if (el) gsap.to(window, { duration: 1, scrollTo: el, ease: 'power3.inOut' });
+                            }}>About us</a>
+                            <a href="#who-we-are" onClick={(e) => {
+                                e.preventDefault();
+                                const el = document.getElementById('who-we-are');
+                                if (el) gsap.to(window, { duration: 1, scrollTo: el, ease: 'power3.inOut' });
+                            }}>Who We Are</a>
+                            <a href="#products" onClick={(e) => {
+                                e.preventDefault();
+                                const el = document.getElementById('products');
+                                if (el) gsap.to(window, { duration: 1, scrollTo: el, ease: 'power3.inOut' });
+                            }}>Products</a>
+                            <a href="#contact" onClick={(e) => {
+                                e.preventDefault();
+                                const el = document.getElementById('contact');
+                                if (el) gsap.to(window, { duration: 1, scrollTo: el, ease: 'power3.inOut' });
+                            }}>Contact us</a>
                         </nav>
                     </div>
 
@@ -66,9 +86,27 @@ export function Footer() {
                         <h3 className="footer-heading">Products</h3>
                         <div className="footer-heading-underline" />
                         <nav className="footer-nav">
-                            <Link to="/products/zemanage">ZeManage</Link>
-                            <Link to="/products/zefacility">ZeFacility</Link>
-                            <Link to="/products/zeconnect">ZeConnect</Link>
+                            <a href="#products" onClick={(e) => {
+                                e.preventDefault();
+                                const element = document.getElementById('products');
+                                if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}>ZeManage</a>
+                            <a href="#products" onClick={(e) => {
+                                e.preventDefault();
+                                const element = document.getElementById('products');
+                                if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}>ZeFacility</a>
+                            <a href="#products" onClick={(e) => {
+                                e.preventDefault();
+                                const element = document.getElementById('products');
+                                if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}>ZeConnect</a>
                         </nav>
                     </div>
 

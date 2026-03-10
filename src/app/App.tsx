@@ -9,6 +9,7 @@ import { ProductsSection } from '../features/products';
 import { DeliveryStatsSection } from '../features/deliveryStats';
 import { TestimonialsSection } from '../features/testimonials';
 import { Footer } from '../components/layout/Footer';
+import group17Img from '../Images/Group 17.svg';
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,9 @@ function App() {
                     <Route path="/" element={
                         <>
                             <HeroSection />
+                            <div className="section-divider-svg">
+                                <img src={group17Img} alt="Zestine Icon" />
+                            </div>
                             <WhoWeAreSection />
                             <ProductsSection />
                             <DeliveryStatsSection />

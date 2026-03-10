@@ -1,105 +1,122 @@
-import React, { useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import React, { useEffect, useRef, useState } from 'react';
 import './TestimonialsSection.css';
 import bgImage from '../../../Images/testiminial/Frame 42.png';
-import quotesImg from '../../../Images/testiminial/quotes.png';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const TESTIMONIALS = [
     {
-        text: 'Zestine tools helped us simplify co-\nordination across complex linked models.\nEngineering Technology Firm',
-        name: 'Jhon Doe',
-        avatarUrl: 'https://i.pravatar.cc/150?img=11'
+        text: 'Zestine tools helped us simplify\ncoordination across complex\nlinked models. Engineering\nTechnology Firm',
+        name: '- Jhon Doe',
     },
     {
-        text: 'Reduced repetitive documentation effort\nacross multiple project phases.\nBIM Technology FIRM',
-        name: 'Jhon Doe',
-        avatarUrl: 'https://i.pravatar.cc/150?img=11'
+        text: 'Reduced repetitive\ndocumentation effort across\nmultiple project phases.\nBIM Technology FIRM',
+        name: '- Jhon Doe',
     },
     {
-        text: 'Enabled our teams to focus on design in\ntent instead of data management.\nSustainability FIRM',
-        name: 'Jhon Doe',
-        avatarUrl: 'https://i.pravatar.cc/150?img=11'
+        text: 'Enabled our teams to focus\non design intent instead of\ndata management.\nSustainability FIRM',
+        name: '- Jhon Doe',
     }
 ];
 
 export const TestimonialsSection: React.FC = () => {
-    const sectionRef = useRef<HTMLElement>(null);
-    const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+    const listRef = useRef<HTMLUListElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const leftColRef = useRef<HTMLDivElement>(null);
+    const [started, setStarted] = useState(false);
 
-    useGSAP(() => {
-        if (!sectionRef.current || cardsRef.current.length === 0) return;
+    useEffect(() => {
+        if (!containerRef.current || !listRef.current) return;
 
-        // Set initial state for cards 2 and 3 so they come from above (behind the previous card)
-        cardsRef.current.forEach((card, index) => {
-            if (!card) return;
-
-            // Ensure earlier cards render on top of later cards so they can slide out from under them
-            gsap.set(card, { zIndex: 10 - index });
-
-            if (index > 0) {
-                // start higher (negative y) and faded
-                gsap.set(card, { y: -150, opacity: 0 });
-            }
+        // Clone all children to create the seamless loop
+        const children = Array.from(listRef.current.children);
+        children.forEach((child) => {
+            const clone = child.cloneNode(true) as HTMLElement;
+            listRef.current!.appendChild(clone);
         });
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top top", // pin when top of section hits top of viewport
-                end: "+=200%", // scroll distance controls animation duration
-                scrub: 1, // smooth scrubbing
-                pin: true, // pin the section
-                anticipatePin: 1,
-                refreshPriority: 1 // Calculate after all upstream sections
-            }
-        });
+        // Direction & Speed
+        containerRef.current.style.setProperty('--animation-direction', 'forwards');
+        containerRef.current.style.setProperty('--animation-duration', '40s');
 
-        // initial hold for card 1
-        tl.to({}, { duration: 0.5 });
+        setStarted(true);
+    }, []);
 
-        cardsRef.current.forEach((card, index) => {
-            if (index === 0) return;
+    // Intersection Observer to detect when a card overlaps the left column
+    useEffect(() => {
+        if (!listRef.current || !leftColRef.current) return;
 
-            tl.to(card, {
-                y: 0,
-                opacity: 1,
-                duration: 1,
-                ease: "power2.out"
+        const checkOverlap = () => {
+            if (!leftColRef.current || !listRef.current) return;
+            const leftRect = leftColRef.current.getBoundingClientRect();
+            const cards = listRef.current.querySelectorAll('.ts-card');
+
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                // We consider it "overlapping" if the left edge of the card touches the left column
+                const cardLeftEdge = rect.left;
+
+                // Transition as soon as it crosses the boundary
+                if (cardLeftEdge <= leftRect.right) {
+                    card.classList.add('ts-card-light');
+                    card.classList.remove('ts-card-dark');
+                } else {
+                    card.classList.add('ts-card-dark');
+                    card.classList.remove('ts-card-light');
+                }
             });
 
-            // hold after each card appears
-            tl.to({}, { duration: 1.5 });
-        });
+            requestAnimationFrame(checkOverlap);
+        };
 
-        // final hold before unpinning
-        tl.to({}, { duration: 0.5 });
-
-    }, { scope: sectionRef });
+        const animationId = requestAnimationFrame(checkOverlap);
+        return () => cancelAnimationFrame(animationId);
+    }, [started]);
 
     return (
-        <section id="testimonials" ref={sectionRef} className="ts-section" style={{ backgroundImage: `url(${bgImage})` }}>
-            <div className="ts-container">
-                <h2 className="ts-title">Trusted by BIM Professionals</h2>
-                <div className="ts-cards-wrapper">
-                    {TESTIMONIALS.map((item, i) => (
-                        <div
-                            key={i}
-                            className="ts-card"
-                            ref={(el) => { cardsRef.current[i] = el; }}
-                        >
-                            <p className="ts-text" style={{ whiteSpace: 'pre-line' }}>{item.text}</p>
+        <section id="testimonials" className="ts-section">
+            <h2 className="ts-title">Trusted by BIM Professionals</h2>
+            <div className="ts-layout">
+                <div ref={leftColRef} className="ts-left-col" style={{ backgroundImage: `url(${bgImage})` }}>
+                    <div className="ts-left-overlay">
+                        <div className="ts-quote-icon">“</div>
+                        <h3 className="ts-left-text">
+                            Zestine was<br />
+                            built by<br />
+                            professionals<br />
+                            who lived those<br />
+                            workflows first.
+                        </h3>
+                    </div>
+                </div>
+                <div className="ts-right-col">
+                    <div ref={containerRef} className="ts-scroller" style={{ overflowX: 'auto', scrollBehavior: 'smooth', scrollbarWidth: 'none' }}>
+                        <ul ref={listRef} className={`ts-scroller-list${started ? ' animate-scroll' : ''}`}>
+                            {TESTIMONIALS.map((item, i) => (
+                                <li key={i} className="ts-card ts-card-dark">
+                                    <p className="ts-text" style={{ whiteSpace: 'pre-line' }}>{item.text}</p>
+                                    <span className="ts-author-name">{item.name}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                            <div className="ts-author-row">
-                                <img src={item.avatarUrl} alt={item.name} className="ts-avatar-img" />
-                                <span className="ts-author-name">{item.name}</span>
-                                <img src={quotesImg} alt="quotes" className="ts-quotes-img" />
-                            </div>
-                        </div>
-                    ))}
+                    <div className="ts-arrows">
+                        <button
+                            className="ts-arrow-btn"
+                            onClick={() => {
+                                if (containerRef.current) {
+                                    containerRef.current.scrollBy({ left: -350, behavior: 'smooth' });
+                                }
+                            }}
+                        >{'<'}</button>
+                        <button
+                            className="ts-arrow-btn"
+                            onClick={() => {
+                                if (containerRef.current) {
+                                    containerRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+                                }
+                            }}
+                        >{'>'}</button>
+                    </div>
                 </div>
             </div>
         </section>

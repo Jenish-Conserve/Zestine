@@ -7,12 +7,14 @@ export default function Navbar() {
     const [activeSection, setActiveSection] = useState('hero');
     const [isVisible, setIsVisible] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
             setActiveSection(id);
+            setIsMobileMenuOpen(false); // Close menu on mobile after clicking
         }
     };
 
@@ -52,13 +54,23 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [prevScrollPos]);
 
+    const toggleMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
     return (
         <nav className={`navbar ${isVisible ? 'navbar--visible' : 'navbar--hidden'}`}>
             <Link to="/" style={{ display: 'flex', alignItems: 'center' }} onClick={() => scrollToSection('hero')}>
-                <img src={logoImg} alt="Zestine Logo" style={{ height: '40px', objectFit: 'contain' }} />
+                <img src={logoImg} alt="Zestine Logo" className="navbar-logo" />
             </Link>
 
-            <ul className="nav-links">
+            <button className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMenu} aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
                 <li>
                     <button
                         className={`nav-link ${activeSection === 'who-we-are' ? 'active' : ''}`}

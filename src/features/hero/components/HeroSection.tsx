@@ -68,7 +68,15 @@ export function HeroSection() {
                             with your projects.
                         </p>
                         <div className="heroButtons">
-                            <button className="btnPrimary">Products</button>
+                            <button
+                                className="btnPrimary"
+                                onClick={() => {
+                                    const el = document.getElementById('products');
+                                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                            >
+                                Products
+                            </button>
                             <button className="btnSecondary">Contact with experts</button>
                         </div>
                     </div>

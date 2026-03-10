@@ -92,6 +92,7 @@ export function ProductsSection() {
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
     const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const activeIndexRef = useRef(0);
+    const [activeTab, setActiveTabState] = useState(0);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -114,6 +115,7 @@ export function ProductsSection() {
 
     const setActiveTab = (index: number) => {
         activeIndexRef.current = index;
+        setActiveTabState(index);
         tabRefs.current.forEach((tab, i) => {
             if (!tab) return;
             const isActive = i === index;
@@ -247,18 +249,18 @@ export function ProductsSection() {
                     {PRODUCTS.map((prod, i) => (
                         <div
                             key={prod.id}
-                            className="ps-tab-wrapper"
+                            className={`ps-tab-wrapper ${i !== activeTab ? 'ps-tab-hidden-mobile' : ''}`}
                             style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}
                             onClick={() => handleTabClick(i)}
                         >
-                            <img src={prod.tabLogo} alt="" style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+                            <img src={prod.tabLogo} alt="" className="ps-tab-logo" />
                             <button
                                 ref={(el) => { if (el) tabRefs.current[i] = el; }}
                                 className="ps-tab"
                                 style={{
-                                    color: i === 0 ? prod.tabAccent : '#6b7280',
-                                    borderColor: i === 0 ? prod.tabAccent : 'transparent',
-                                    fontWeight: i === 0 ? '600' : '400',
+                                    color: i === activeTab ? prod.tabAccent : '#6b7280',
+                                    borderColor: i === activeTab ? prod.tabAccent : 'transparent',
+                                    fontWeight: i === activeTab ? '600' : '400',
                                     backgroundColor: '#fff' // matches the mockup white button box
                                 }}
                             >

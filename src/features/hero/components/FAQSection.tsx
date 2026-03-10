@@ -18,7 +18,7 @@ export function FAQSection() {
     };
 
     return (
-        <section className="faq-container">
+        <section id="contact" className="faq-container">
             <div className="faq-content">
 
                 {/* Left Side: FAQ List */}

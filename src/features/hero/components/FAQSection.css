@@ -108,7 +108,8 @@
 
 .contact-form-card {
     width: 100%;
-    max-width: 550px;
+    max-width: 800px;
+    /* Increased width */
     background-color: #1e4066;
     /* Match the dark oceanic blue card */
     border-radius: 16px;

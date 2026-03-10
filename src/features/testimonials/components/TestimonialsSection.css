@@ -1,125 +1,234 @@
 .ts-section {
-    background-color: #0c3866;
-    background-size: 110% auto;
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    color: #ffffff;
+    background-color: #f0f4f8;
+    /* Very light blue background */
     padding: 6vh 2rem;
     position: relative;
     height: auto;
     min-height: 100vh;
-}
-
-.ts-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    margin-top: -50px;
+    /* Slight overlap with section above if needed */
+    z-index: 10;
 }
 
 .ts-title {
     font-size: 3rem;
     font-weight: 600;
     text-align: center;
-    margin-bottom: 2.5rem;
-    letter-spacing: -0.02em;
-    color: #ffffff;
+    margin-bottom: 3rem;
+    color: #033465;
+    /* Dark blue title */
+    margin-top: 2rem;
 }
 
-.ts-cards-wrapper {
+.ts-layout {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
     width: 100%;
-    max-width: 650px;
-    position: relative;
+    max-width: 1400px;
+    align-items: stretch;
 }
 
-.ts-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 100%);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+/* LEFT COLUMN */
+.ts-left-col {
+    flex: 0 0 55%;
+    /* Slightly wider so it sits under the overlapping card */
+    background-size: cover;
+    background-position: center;
     border-radius: 20px;
-    padding: 1.5rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+    z-index: 1;
+    /* Below right col */
+}
+
+.ts-left-overlay {
+    position: absolute;
+    inset: 0;
+    /* Using Who We Are gradient as overlay */
+    background: linear-gradient(to bottom left, rgba(132, 63, 93, 0.8), rgba(7, 53, 103, 0.8));
+    padding: 3rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    justify-content: center;
+}
+
+.ts-quote-icon {
+    font-size: 4rem;
+    color: #fff;
+    font-family: serif;
+    line-height: 1;
+    margin-bottom: -1rem;
+}
+
+.ts-left-text {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.3;
+}
+
+/* RIGHT COLUMN (SCROLLER) */
+.ts-right-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center the scrolling cards vertically */
+    overflow: hidden;
+    position: relative;
+    margin-left: -15%;
+    /* Pull cards over the left column */
+    z-index: 2;
+    /* Ensure it stays on top of the left column */
+}
+
+.ts-scroller {
     position: relative;
     width: 100%;
+    overflow: hidden;
+    /* Create fading masks ONLY on right edge, leave left edge sharp over the image */
+    -webkit-mask-image: linear-gradient(to right, white 0%, white 90%, transparent);
+    mask-image: linear-gradient(to right, white 0%, white 90%, transparent);
+    padding: 1rem 0;
+    margin-top: auto;
+    margin-bottom: 2rem;
+}
+
+.ts-scroller-list {
+    display: flex;
+    min-width: 100%;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: max-content;
+}
+
+.ts-scroller-list.animate-scroll {
+    animation: scroll-left var(--animation-duration, 40s) linear infinite;
+    animation-direction: var(--animation-direction, forwards);
+}
+
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* CARDS */
+.ts-card {
+    width: 320px;
+    /* fixed width for horizontal scroll */
+    min-height: 220px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    margin-right: 1.5rem;
+    /* Gap for infinite scroll clones */
+}
+
+.ts-card-light {
+    background: #ffffff;
+    border: 1px solid #ff3b4a;
+    /* red border */
+    color: #333333;
+}
+
+.ts-card-dark {
+    background: linear-gradient(to bottom left, #843F5D, #073567);
+    color: #ffffff;
+    border: 1px solid transparent;
 }
 
 .ts-text {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     line-height: 1.6;
     margin: 0;
-    font-weight: 300;
+    font-weight: 400;
+    flex-grow: 1;
+    margin-bottom: 2rem;
+}
+
+.ts-card-light .ts-text {
+    color: #555555;
+}
+
+.ts-card-dark .ts-text {
     color: rgba(255, 255, 255, 0.95);
 }
 
-.ts-author-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.ts-avatar-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 .ts-author-name {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    font-style: italic;
     font-weight: 600;
 }
 
-.ts-quotes-img {
-    margin-left: auto;
-    width: 48px;
-    height: auto;
-    object-fit: contain;
-    position: absolute;
-    bottom: 20px;
-    right: 25px;
-    opacity: 0.15;
+/* ARROWS */
+.ts-arrows {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ts-arrow-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #ff3b4a;
+    color: #ffffff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(255, 59, 74, 0.3);
+    transition: background-color 0.2s;
+}
+
+.ts-arrow-btn:hover {
+    background-color: #e53542;
+}
+
+@media (max-width: 1024px) {
+    .ts-layout {
+        flex-direction: column;
+    }
+
+    .ts-left-col {
+        min-height: 300px;
+    }
+
+    .ts-right-col {
+        margin-left: 0;
+        /* Remove the overlap pull on stacked layout */
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
-    .ts-section {
-        padding: 5vh 1rem;
-    }
-
     .ts-title {
         font-size: 2.2rem;
-        margin-bottom: 2rem;
     }
 
-    .ts-card {
-        padding: 1.5rem;
-        gap: 0.75rem;
-    }
-
-    .ts-text {
-        font-size: 0.95rem;
-        line-height: 1.5;
-    }
-
-    .ts-quotes-img {
-        width: 32px;
-        bottom: 15px;
-        right: 15px;
-    }
-
-    .ts-author-row {
-        margin-top: 1rem;
+    .ts-left-text {
+        font-size: 1.8rem;
     }
 }

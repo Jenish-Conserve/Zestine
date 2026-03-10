@@ -52,6 +52,12 @@
     /* move tabs up and add space below */
 }
 
+.ps-tab-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
 .ps-tab {
     background: transparent;
     border: 1.5px solid transparent;
@@ -438,5 +444,39 @@
     100% {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+/* ── Mobile Responsiveness ── */
+@media (max-width: 768px) {
+    .ps-tabs {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 1rem;
+        gap: 1rem;
+        margin-bottom: 0.5rem;
+        /* Reduced space between tabs and card */
+    }
+
+    .ps-tab-wrapper {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .ps-tab-hidden-mobile {
+        display: none !important;
+    }
+
+    .ps-tab-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .ps-tab {
+        flex: 1;
+        /* Stretch to fill remaining width */
+        padding: 0.8rem 1rem;
+        font-size: 1.05rem;
+        text-align: center;
     }
 }
