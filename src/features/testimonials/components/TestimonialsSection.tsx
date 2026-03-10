@@ -81,7 +81,7 @@ export const TestimonialsSection: React.FC = () => {
     }, { scope: sectionRef });
 
     return (
-        <section ref={sectionRef} className="ts-section" style={{ backgroundImage: `url(${bgImage})` }}>
+        <section id="testimonials" ref={sectionRef} className="ts-section" style={{ backgroundImage: `url(${bgImage})` }}>
             <div className="ts-container">
                 <h2 className="ts-title">Trusted by BIM Professionals</h2>
                 <div className="ts-cards-wrapper">

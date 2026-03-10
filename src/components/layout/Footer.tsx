@@ -17,7 +17,7 @@ export function Footer() {
     };
 
     return (
-        <footer className="footer-container" style={{ backgroundColor: '#002145' }}>
+        <footer id="footer" className="footer-container" style={{ backgroundColor: '#002145' }}>
             <div className="footer-backgrounds">
                 {/* Background Pattern overlaying the entire footer */}
                 <div

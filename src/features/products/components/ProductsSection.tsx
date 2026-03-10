@@ -7,6 +7,9 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 import logoColorImg from '../../../Images/product/logo-color.png';
 import logoBwImg from '../../../Images/product/logo = bw.png';
+import zeManageIcon from '../../../Images/product/logo/Ze manage.png';
+import zeFacilityIcon from '../../../Images/product/logo/Ze facility.png';
+import zeConnectIcon from '../../../Images/product/logo/Ze connect_png.png';
 import zbgImg from '../../../Images/product/product bg z.png';
 import zemanageImg from '../../../Images/product/zemanage.jpg';
 import zefacilityImg from '../../../Images/product/zefacility.jpg';
@@ -32,6 +35,7 @@ const PRODUCTS = [
         downloadBorder: 'none',
         tabAccent: '#0f172a',
         logo: logoColorImg,
+        tabLogo: zeManageIcon,
         zFilter: 'brightness(0) invert(1) opacity(0.15)',
         image: zemanageImg,
         bgImage: clrbgImg,
@@ -52,6 +56,7 @@ const PRODUCTS = [
         downloadBorder: 'none',
         tabAccent: '#1a4490',
         logo: logoBwImg,
+        tabLogo: zeFacilityIcon,
         image: zefacilityImg,
         bgImage: zbgImg,
     },
@@ -71,6 +76,7 @@ const PRODUCTS = [
         downloadBorder: 'none',
         tabAccent: '#f04141',
         logo: logoBwImg,
+        tabLogo: zeConnectIcon,
         image: zemanageImg,
         bgImage: zbgImg,
     },
@@ -210,7 +216,7 @@ export function ProductsSection() {
             // Previous card slides up and out — concurrent with incoming card (no fade)
             tl.to(prevCard, {
                 scale: 0.95,
-                y: -80,
+                y: -10, // Reduced from -80 to prevent overlapping the tabs menu
                 duration: 1,
                 ease: 'power2.inOut',
             }, '<');
@@ -229,6 +235,7 @@ export function ProductsSection() {
     return (
         /* Outer wrapper: sets the total scroll distance so next section is pushed down */
         <div
+            id="products"
             ref={wrapperRef}
             className="ps-scroll-wrapper"
             style={{ height: `${totalScrollVh}vh` }}
@@ -238,19 +245,26 @@ export function ProductsSection() {
                 {/* Tab row: active tab border matches the current card accent */}
                 <div className="ps-tabs">
                     {PRODUCTS.map((prod, i) => (
-                        <button
+                        <div
                             key={prod.id}
-                            ref={(el) => { if (el) tabRefs.current[i] = el; }}
-                            className="ps-tab"
+                            className="ps-tab-wrapper"
+                            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}
                             onClick={() => handleTabClick(i)}
-                            style={{
-                                color: i === 0 ? prod.tabAccent : '#6b7280',
-                                borderColor: i === 0 ? prod.tabAccent : 'transparent',
-                                fontWeight: i === 0 ? '600' : '400'
-                            }}
                         >
-                            {prod.label}
-                        </button>
+                            <img src={prod.tabLogo} alt="" style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+                            <button
+                                ref={(el) => { if (el) tabRefs.current[i] = el; }}
+                                className="ps-tab"
+                                style={{
+                                    color: i === 0 ? prod.tabAccent : '#6b7280',
+                                    borderColor: i === 0 ? prod.tabAccent : 'transparent',
+                                    fontWeight: i === 0 ? '600' : '400',
+                                    backgroundColor: '#fff' // matches the mockup white button box
+                                }}
+                            >
+                                {prod.label}
+                            </button>
+                        </div>
                     ))}
                 </div>
                 <div className="ps-cards-container">

@@ -6,6 +6,7 @@
 .ps-scroll-wrapper {
     position: relative;
     width: 100%;
+    margin-top: -50px;
     background: #f0f4f8;
     /* Moved background to wrapper so it doesn't clip when scrolling */
     border-top-left-radius: 50px;
@@ -22,7 +23,7 @@
     /* Dynamic height based on card */
     min-height: 100vh;
     /* Ensure it covers at least the viewport so scroll doesn't show white below */
-    padding-top: 6rem;
+    padding-top: 8rem;
     /* Push down slightly from the absolute top */
     padding-bottom: 4rem;
     display: flex;
@@ -46,6 +47,9 @@
     /* don't compress the tab row */
     z-index: 20;
     position: relative;
+    margin-top: -3rem;
+    margin-bottom: 4rem;
+    /* move tabs up and add space below */
 }
 
 .ps-tab {

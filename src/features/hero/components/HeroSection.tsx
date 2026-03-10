@@ -20,7 +20,7 @@ export function HeroSection() {
 
     return (
         <>
-            <section ref={containerRef} className="heroContainer">
+            <section id="hero" ref={containerRef} className="heroContainer">
 
                 {/* ── Full-screen Antigravity animation background ── */}
                 <div className="heroAnimBg">
@@ -51,20 +51,26 @@ export function HeroSection() {
 
                 {/* ── Text content — centered ── */}
                 <div className="heroContent">
-                    <h1 className="heroTitle">
-                        Engineering Intelligence.<br />Amplified.
-                    </h1>
-                    <p className="heroSubhead">
-                        Built for the people designing the world we live in.
-                    </p>
-                    <p className="heroText">
-                        Zestine helps AEC organizations move from fragmented workflows
-                        to intelligent operations — replacing repetitive processes with
-                        systems that think, guide, and scale with your projects.
-                    </p>
-                    <div className="heroButtons">
-                        <button className="btnPrimary">Products</button>
-                        <button className="btnSecondary">Connect with Experts</button>
+                    <div className="heroLeft">
+                        <h1 className="heroTitle">
+                            <span className="heroTitleDark">Engineering Intelligence.</span><br />
+                            <span className="heroTitleRed">Amplified.</span>
+                        </h1>
+                        <p className="heroSubhead">
+                            Built for the people designing the world we live in.
+                        </p>
+                    </div>
+                    <div className="heroRight">
+                        <p className="heroText">
+                            Zestine helps AEC organizations move from fragmented
+                            workflows to intelligent operations replacing repetitive
+                            processes with systems that think, guide, and scale
+                            with your projects.
+                        </p>
+                        <div className="heroButtons">
+                            <button className="btnPrimary">Products</button>
+                            <button className="btnSecondary">Contact with experts</button>
+                        </div>
                     </div>
                 </div>
             </section>

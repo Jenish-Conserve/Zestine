@@ -49,52 +49,73 @@
     position: relative;
     z-index: 2;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: space-between;
+    text-align: left;
     width: 100%;
-    max-width: 860px;
+    max-width: 1100px;
     margin: 0 auto;
     padding-top: 4rem;
-    gap: 1.5rem;
+    gap: 4rem;
+}
+
+.heroLeft {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+}
+
+.heroRight {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
 }
 
 .heroTitle {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2rem, 3.5vw, 3.8rem);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.2;
     letter-spacing: -0.02em;
-    color: #001f3f;
     margin: 0;
 }
 
+.heroTitleDark {
+    color: #033465;
+}
+
+.heroTitleRed {
+    color: #FC424F;
+}
+
 .heroSubhead {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    font-weight: 300;
-    color: #0a3055;
-    line-height: 1.5;
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    font-weight: 400;
+    color: #333333;
+    line-height: 1.4;
     max-width: 620px;
+    margin-top: 2rem;
 }
 
 .heroText {
-    font-size: 1rem;
+    font-size: 1.25rem;
     line-height: 1.6;
-    color: #334a5e;
+    color: #333333;
+    font-weight: 500;
     max-width: 600px;
+    margin-bottom: 2rem;
 }
 
 .heroButtons {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
 .btnPrimary {
     position: relative;
-    background-color: #FFBA00;
-    /* Zestine Orange */
+    background-color: #FC424F;
     color: white;
     padding: 0.875rem 2rem;
     border-radius: 8px;
@@ -104,41 +125,22 @@
     cursor: pointer;
     overflow: hidden;
     z-index: 1;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 20px rgba(255, 186, 0, 0.35);
-}
-
-.btnPrimary::before {
-    content: '';
-    position: absolute;
-    bottom: -50px;
-    left: -50px;
-    width: 100px;
-    height: 100px;
-    background-color: #7EBA00;
-    /* Zestine Green */
-    border-radius: 50%;
-    z-index: -1;
-    transform: scale(0);
-    transition: transform 1.2s ease-in-out;
-    
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 15px rgba(252, 66, 79, 0.2);
 }
 
 .btnPrimary:hover {
-    box-shadow: 0 6px 20px rgba(126, 186, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(252, 66, 79, 0.4);
     transform: translateY(-2px);
-}
-
-.btnPrimary:hover::before {
-    transform: scale(10);
+    background-color: #e53945;
 }
 
 .btnSecondary {
     background-color: transparent;
-    color: #002145;
+    color: #FC424F;
     padding: 0.875rem 2rem;
     border-radius: 8px;
-    border: 1px solid rgba(0, 33, 69, 0.4);
+    border: 1px solid rgba(252, 66, 79, 0.5);
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
@@ -146,8 +148,8 @@
 }
 
 .btnSecondary:hover {
-    background: rgba(0, 33, 69, 0.06);
-    border-color: rgba(0, 33, 69, 0.7);
+    background: rgba(252, 66, 79, 0.05);
+    border-color: #FC424F;
     transform: translateY(-2px);
 }
 
