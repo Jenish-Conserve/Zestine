@@ -1,17 +1,12 @@
 .ts-section {
     background-color: #f0f4f8;
     /* Very light blue background */
-    padding: 6vh 2rem;
+    padding: 6vh 0 10vh; /* Increased bottom space further */
     position: relative;
     height: auto;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    margin-top: -50px;
-    /* Slight overlap with section above if needed */
     z-index: 10;
 }
 
@@ -28,7 +23,7 @@
 .ts-layout {
     display: flex;
     width: 100%;
-    max-width: 1400px;
+    max-width: 100%; /* Full width */
     align-items: stretch;
 }
 
@@ -41,7 +36,7 @@
     border-radius: 20px;
     position: relative;
     overflow: hidden;
-    min-height: 400px;
+    min-height: 550px; /* Increased from 400px */
     z-index: 1;
     /* Below right col */
 }
@@ -66,10 +61,10 @@
 }
 
 .ts-left-text {
-    font-size: 2.2rem;
-    font-weight: 300;
+    font-size: 2.8rem; /* Increased from 2.2rem */
+    font-weight: 600; /* Increased from 300 */
     color: #fff;
-    line-height: 1.3;
+    line-height: 1.2; /* Tightened slightly for larger size */
 }
 
 /* RIGHT COLUMN (SCROLLER) */
@@ -91,12 +86,12 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    /* Create fading masks ONLY on right edge, leave left edge sharp over the image */
-    -webkit-mask-image: linear-gradient(to right, white 0%, white 90%, transparent);
-    mask-image: linear-gradient(to right, white 0%, white 90%, transparent);
+    /* Removed fading masks for sharp edges */
+    /* -webkit-mask-image: linear-gradient(to right, white 0%, white 90%, transparent); */
+    /* mask-image: linear-gradient(to right, white 0%, white 90%, transparent); */
     padding: 1rem 0;
-    margin-top: auto;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .ts-scroller-list {
@@ -110,8 +105,8 @@
 }
 
 .ts-scroller-list.animate-scroll {
-    animation: scroll-left var(--animation-duration, 40s) linear infinite;
-    animation-direction: var(--animation-direction, forwards);
+    animation: scroll-left var(--animation-duration, 50s) linear infinite;
+    width: max-content;
 }
 
 @keyframes scroll-left {
@@ -126,19 +121,17 @@
 
 /* CARDS */
 .ts-card {
-    width: 320px;
-    /* fixed width for horizontal scroll */
-    min-height: 220px;
+    width: 450px; /* Increased from 320px for rectangular shape */
+    min-height: 280px; 
     flex-shrink: 0;
     border-radius: 12px;
-    padding: 2rem;
+    padding: 2.5rem; /* Increased padding slightly */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
-    margin-right: 1.5rem;
-    /* Gap for infinite scroll clones */
+    margin-right: 2rem; /* Increased gap */
 }
 
 .ts-card-light {
@@ -155,8 +148,8 @@
 }
 
 .ts-text {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1.15rem; /* Increased from 0.95rem */
+    line-height: 1.7;
     margin: 0;
     font-weight: 400;
     flex-grow: 1;
@@ -181,7 +174,8 @@
 .ts-arrows {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 10%; /* Shifted towards right */
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -229,6 +223,7 @@
     }
 
     .ts-left-text {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
+        font-weight: 600;
     }
 }

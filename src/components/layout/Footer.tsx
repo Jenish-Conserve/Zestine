@@ -1,20 +1,14 @@
 import { Link } from 'react-router-dom';
-import { FaInstagram, FaYoutube, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaArrowUp } from 'react-icons/fa';
+import { FaInstagram, FaYoutube, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import logoImg from '../../Images/logo/Group 174.png';
 import footerPattern from '../../Images/footer/Group 162.png';
 import './Footer.css';
 
 import gsap from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-
-gsap.registerPlugin(ScrollToPlugin);
 
 export function Footer() {
-    const scrollToTop = () => {
-        // Use GSAP to animate window scroll cleanly to the banner
-        gsap.to(window, { duration: 1, scrollTo: 0, ease: 'power3.inOut' });
-    };
+
 
     return (
         <footer id="footer" className="footer-container" style={{ backgroundColor: '#002145' }}>
@@ -157,10 +151,7 @@ export function Footer() {
                 </div>
             </div>
 
-            {/* Floating Scroll to Top button pointing out from edge */}
-            <button className="scroll-to-top" onClick={scrollToTop} aria-label="Scroll to top">
-                <FaArrowUp />
-            </button>
+
         </footer>
     );
 }

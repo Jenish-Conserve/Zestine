@@ -81,10 +81,10 @@ export function WhoWeAreSection() {
                                     <span className="letter-wrapper"><span className="red-circle"></span>D</span>espite powerful AEC tools, real-world project<br />delivery remained slowed by:
                                 </h3>
                                 <ul className="wwa-list">
-                                    <li><span className="letter-wrapper"><span className="red-circle small"></span>W</span>orkflow friction</li>
-                                    <li><span className="letter-wrapper"><span className="red-circle small"></span>I</span>mplementation gaps</li>
-                                    <li><span className="letter-wrapper"><span className="red-circle small"></span>M</span>anual documentation</li>
-                                    <li><span className="letter-wrapper"><span className="red-circle small"></span>R</span>epetitive operational tasks</li>
+                                    <li>Workflow friction</li>
+                                    <li>Implementation gaps</li>
+                                    <li>Manual documentation</li>
+                                    <li>Repetitive operational tasks</li>
                                 </ul>
                             </div>
 

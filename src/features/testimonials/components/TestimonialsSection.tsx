@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './TestimonialsSection.css';
-import bgImage from '../../../Images/testiminial/Frame 42.png';
+import bgImage from '../../../Images/banner/banner.jpg';
 
 const TESTIMONIALS = [
     {
@@ -27,15 +27,15 @@ export const TestimonialsSection: React.FC = () => {
         if (!containerRef.current || !listRef.current) return;
 
         // Clone all children to create the seamless loop
-        const children = Array.from(listRef.current.children);
-        children.forEach((child) => {
+        const originalChildren = Array.from(listRef.current.children);
+        originalChildren.forEach((child) => {
             const clone = child.cloneNode(true) as HTMLElement;
             listRef.current!.appendChild(clone);
         });
 
         // Direction & Speed
         containerRef.current.style.setProperty('--animation-direction', 'forwards');
-        containerRef.current.style.setProperty('--animation-duration', '40s');
+        containerRef.current.style.setProperty('--animation-duration', '50s'); 
 
         setStarted(true);
     }, []);

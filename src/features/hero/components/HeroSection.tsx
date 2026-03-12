@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState, useEffect } from 'react';
 import { useGsapAnimation } from '../../../hooks/useGsapAnimation';
 import { heroRevealAnimation } from '../hooks/useHeroAnimation';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaArrowUp } from 'react-icons/fa';
 import './HeroSection.css';
 
 // Lazy-load the heavy Three.js canvas so it doesn't block the initial render
@@ -10,6 +10,7 @@ const Antigravity = lazy(() => import('../../../components/3d/Antigravity'));
 export function HeroSection() {
     const { elementRef: containerRef } = useGsapAnimation<HTMLDivElement>({ animation: heroRevealAnimation });
     const [isMobile, setIsMobile] = useState(false);
+    const [showScrollTop, setShowScrollTop] = useState(false);
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -17,6 +18,33 @@ export function HeroSection() {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // Show button when the section is visible
+                setShowScrollTop(entry.isIntersecting);
+            },
+            {
+                threshold: 0.1, // Trigger when 10% of the section is visible
+            }
+        );
+
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            observer.observe(contactSection);
+        }
+
+        return () => {
+            if (contactSection) {
+                observer.unobserve(contactSection);
+            }
+        };
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <>
@@ -26,7 +54,7 @@ export function HeroSection() {
                 <div className="heroAnimBg">
                     <Suspense fallback={<div className="heroAnimFallback" />}>
                         <Antigravity
-                            count={isMobile ? 150 : 500}
+                            count={isMobile ? 50 : 160}
                             magnetRadius={10}
                             ringRadius={10}
                             waveSpeed={0.4}
@@ -57,7 +85,8 @@ export function HeroSection() {
                             <span className="heroTitleRed">Amplified.</span>
                         </h1>
                         <p className="heroSubhead">
-                            Built for the people designing the world we live in.
+                            Built for the people designing<br />
+                            the world we live in.
                         </p>
                     </div>
                     <div className="heroRight">
@@ -93,6 +122,15 @@ export function HeroSection() {
             >
                 <FaWhatsapp />
             </a>
+
+            {/* Floating Scroll to Top button */}
+            <button
+                className={`scrollTopFloat ${showScrollTop ? 'visible' : ''}`}
+                onClick={scrollToTop}
+                aria-label="Scroll to top"
+            >
+                <FaArrowUp />
+            </button>
         </>
     );
 }

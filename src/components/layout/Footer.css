@@ -205,45 +205,7 @@
     color: #fff;
 }
 
-/* Custom Out-of-bounds Top Scroll Arrow making a continuous border dome */
-.scroll-to-top {
-    position: absolute;
-    top: -35px;
-    /* Offset upward more for increased height */
-    right: 4rem;
-    background-color: #002145;
-    color: #fff;
-    width: 60px;
-    height: 35px;
-    /* Increased height to make it taller than a perfect half-circle */
-    border: 2px solid #0ea5e9;
-    border-bottom: none;
-    /* Open to the footer */
-    border-top-left-radius: 40px;
-    /* Slightly tighter pill radius */
-    border-top-right-radius: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    /* Align to the bottom edge */
-    padding-bottom: 2px;
-    /* Pull arrow significantly down closer to the line */
-    font-size: 1.5rem;
-    cursor: pointer;
-    box-shadow: none;
-    transition: all 0.3s ease;
-    z-index: 20;
-}
 
-/* Kill the jagged Batman ears completely */
-.scroll-to-top::before,
-.scroll-to-top::after {
-    display: none;
-}
-
-.scroll-to-top:hover {
-    color: #3b82f6;
-}
 
 /* Responsive Mapping */
 @media (max-width: 1200px) {
