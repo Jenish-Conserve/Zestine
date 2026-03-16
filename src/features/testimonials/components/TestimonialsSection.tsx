@@ -4,27 +4,27 @@ import bgImage from '../../../Images/banner/banner.jpg';
 
 const TESTIMONIALS = [
     {
-        text: '“Zestine’s products bring a practical approach to BIM automation. Their solutions are clearly designed with real project workflows in mind and have helped our team simplify several coordination tasks across Revit models.”',
+        text: '“Zestine’s tools take a very practical approach to BIM automation. They fit naturally into the way our projects already run, and they’ve helped our team simplify several coordination tasks across Revit models.”',
         name: '- Director of BIM',
     },
     {
-        text: '“What stands out about Zestine is how their tools focus on solving everyday BIM workflow challenges. Their products integrate smoothly with existing processes and help teams work more efficiently.”',
+        text: '“What I appreciate about Zestine is that their tools focus on the everyday challenges BIM teams actually deal with. They integrate smoothly with our existing workflows and make collaboration across the team more efficient.”',
         name: '- Head of Digital Engineering',
     },
     {
-        text: '“ZeConnect helped streamline how our team manages Revit links and exports model views for coordination. The workflow feels much more structured and easier to handle during project collaboration.”',
+        text: '“ZeConnect made it much easier for our team to manage Revit links and export model views for coordination. The whole process feels more structured now, especially when we’re collaborating across multiple teams.”',
         name: '- Senior Digital Delivery Expert',
     },
     {
-        text: '“With ZeFacility, generating schedules and managing space data across multiple Revit models became far more organized for our team. It reduced a lot of repetitive manual work.”',
+        text: '“With ZeFacility, managing schedules and space data across multiple Revit models became far more organized. It removed a lot of repetitive manual work our team used to deal with.”',
         name: '- Facility Management Lead',
     },
     {
-        text: '“Our coordination workflows involve frequent sharing of model views and linked files. ZeConnect simplified those tasks and helped our team maintain consistency across projects.”',
+        text: '“Our coordination work involves constant sharing of model views and linked files. ZeConnect simplified those tasks and helped us maintain better consistency across projects.”',
         name: '- Project BIM Coordinator',
     },
     {
-        text: '“ZeFacility improved the way we manage room data and schedules across our BIM models. It gave our team a more reliable way to keep information organized.”',
+        text: '“ZeFacility improved how we manage room data and schedules in our BIM models. It gave our team a much more reliable way to keep information organized across projects.”',
         name: '- VDC Manager',
     }
 ];

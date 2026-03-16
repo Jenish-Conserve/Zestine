@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { FaDownload, FaTimes, FaCheckCircle } from 'react-icons/fa';
+import { FiArrowUpRight } from 'react-icons/fi';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -8,14 +9,14 @@ import zeManageIcon from '../../../Images/product/logo/Ze manage.png';
 import zeFacilityIcon from '../../../Images/product/logo/Ze facility.png';
 import zeConnectIcon from '../../../Images/product/logo/Ze connect_png.png';
 import zeDiagIcon from '../../../Images/product/logo-color.png';
-import zbgImg from '../../../Images/product/product bg z.png';
 import zemanageImg from '../../../Images/product/zemanage.jpg';
 import zefacilityImg from '../../../Images/product/zefacility.jpg';
+import zColorLogo from '../../../Images/product/logo-color.png';
+import zBWLogo from '../../../Images/product/logo = bw.png';
 import zeManageOutline from '../../../Images/product/logo/Ze manage.png';
 import zeFacilityOutline from '../../../Images/product/outline logos/Zefacily final_outline & white logo-01.png';
 import zeConnectOutline from '../../../Images/product/outline logos/ze connect_outline & white logo-01.png';
-import zeDiagOutline from '../../../Images/product/logo-color.png';
-import clrbgImg from '../../../Images/product/clrbg.png';
+import zeDiagJpg from '../../../Images/product/outline logos/zediag.jpeg';
 import './ProductsSection.css';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -25,7 +26,8 @@ const PRODUCTS = [
         id: 'zemanage',
         label: 'ZeManage',
         description:
-            'An intelligent BIM platform that improves model performance and streamlines workflows. Smarter BIM environments, lower project risks.',
+            'An intelligent BIM platform that improves model performance and streamlines workflows. By revealing potential issues early, it helps teams mitigate risks proactively and maintain efficient, reliable BIM project environments.',
+        tagline: 'Clear visibility, confident project delivery.\nSmarter BIM environments, lower project risks.\nProactive insights, automate workflows.',
         bg: '#ffffff',
         cardBg: '#ffffff',
         textColor: '#0f172a',
@@ -36,18 +38,19 @@ const PRODUCTS = [
         downloadText: '#ffffff',
         downloadBorder: 'none',
         tabAccent: '#0f172a',
-        logo: zeManageOutline,
+        logo: zColorLogo,
         tabLogo: zeManageIcon,
         btnText: 'Join Waitlist',
-        zFilter: 'brightness(0) invert(1) opacity(0.15)',
+        zFilter: 'grayscale(1) opacity(0.7)',
         image: zemanageImg,
-        bgImage: clrbgImg,
+        bgImage: zeManageOutline,
     },
     {
         id: 'zefacility',
         label: 'ZeFacility',
         description:
-            'Automate schedule generation, import/export data, and manage spaces effortlessly across Revit models. Smarter schedules, simpler facility management.',
+            'Automate schedule generation, import/export data, and manage spaces effortlessly across Revit models with intuitive controls.',
+        tagline: 'Smarter schedules, simpler facility management.\nOrganized spaces, automated workflows.\nStructured COBie data, smoother operations.',
         bg: '#074C91',
         cardBg: '#074C91',
         textColor: '#ffffff',
@@ -58,17 +61,18 @@ const PRODUCTS = [
         downloadText: '#111827',
         downloadBorder: 'none',
         tabAccent: '#1a4490',
-        logo: zeFacilityOutline,
+        logo: zBWLogo,
         tabLogo: zeFacilityIcon,
-        btnText: 'Join Waitlist',
+        btnText: 'Download',
         image: zefacilityImg,
-        bgImage: zbgImg,
+        bgImage: zeFacilityOutline,
     },
     {
         id: 'zeconnect',
         label: 'ZeConnect',
         description:
-            'Streamline Revit workflows by exporting 3D views and managing links effortlessly from a centralized BIM hub. Seamless connections, smarter workflows.',
+            'Streamline Revit workflows by exporting 3D views and managing links effortlessly, all from a centralized BIM hub.',
+        tagline: 'Seamless connections, smarter workflows.\nConnect teams, simplify processes.\nOne link, total control.',
         bg: '#FC424F',
         cardBg: '#FC424F',
         textColor: '#ffffff',
@@ -79,19 +83,20 @@ const PRODUCTS = [
         downloadText: '#111827',
         downloadBorder: 'none',
         tabAccent: '#f04141',
-        logo: zeConnectOutline,
+        logo: zBWLogo,
         tabLogo: zeConnectIcon,
-        btnText: 'Join Waitlist',
+        btnText: 'Download',
         image: zemanageImg,
-        bgImage: zbgImg,
+        bgImage: zeConnectOutline,
     },
     {
         id: 'zediag',
         label: 'ZeDiag',
         description:
-            'Instantly diagnose Revit crashes by analyzing journal files and uncover issues without manual log scanning. Turn crash logs into insights.',
-        bg: '#0f172a',
-        cardBg: '#0f172a',
+            'Instantly diagnose Revit crashes by analyzing journal files and uncover recurring issues without manual log scanning.',
+        tagline: 'Turn crash logs into insights.\nDiagnose Revit issues instantly.\nUnderstand crashes. Fix faster.',
+        bg: '#7eba00',
+        cardBg: '#7eba00',
         textColor: '#ffffff',
         subTextColor: 'rgba(255,255,255,0.75)',
         badgeBg: '#ffffff',
@@ -99,12 +104,12 @@ const PRODUCTS = [
         downloadBg: '#ffffff',
         downloadText: '#111827',
         downloadBorder: 'none',
-        tabAccent: '#0f172a',
-        logo: zeDiagOutline,
+        tabAccent: '#7eba00',
+        logo: zBWLogo,
         tabLogo: zeDiagIcon,
-        btnText: 'Join Waitlist',
+        btnText: 'Know More',
         image: zemanageImg,
-        bgImage: zbgImg,
+        bgImage: zeDiagJpg,
     },
 ];
 
@@ -351,15 +356,16 @@ export function ProductsSection() {
                             ref={(el) => { if (el) cardRefs.current[i] = el; }}
                             className="ps-card"
                             key={p.id}
-                            style={(() => {
-                                const bg = 'bgImage' in p ? (p as any).bgImage : null;
-                                return {
-                                    background: bg
-                                        ? `url('${bg}') 70% center / 35% no-repeat, ${p.cardBg}`
-                                        : p.cardBg
-                                };
-                            })()}
+                            style={{ backgroundColor: p.cardBg }}
                         >
+                            {/* Background Logo Overlay */}
+                            <div 
+                                className="ps-card-bg-logo"
+                                style={{ 
+                                    backgroundImage: `url('${(p as any).bgImage}')`,
+                                    filter: p.id === 'zemanage' ? (p as any).zFilter : 'none'
+                                }}
+                            />
                             {/* Top row: badge + logo */}
                             <div className="ps-card-top">
                                 <span
@@ -371,11 +377,7 @@ export function ProductsSection() {
                                 <img
                                     src={p.logo}
                                     alt="Zestine logo"
-                                    className="ps-logo"
-                                    style={{
-                                        width: p.id === 'zediag' ? '60px' : '150px',
-                                        height: 'auto'
-                                    }}
+                                    className="ps-card-logo-top"
                                 />
                             </div>
 
@@ -390,6 +392,13 @@ export function ProductsSection() {
                                     <p className="ps-description" style={{ color: p.subTextColor }}>
                                         {p.description}
                                     </p>
+                                    {(p as any).tagline && (
+                                        <div className="ps-tagline" style={{ color: p.subTextColor, opacity: 0.8 }}>
+                                            {(p as any).tagline.split('\n').map((line: string, idx: number) => (
+                                                <div key={idx} className="ps-tagline-item">{line}</div>
+                                            ))}
+                                        </div>
+                                    )}
                                     <button
                                         className="ps-download-btn btn-zestine"
                                         onClick={openModal}
@@ -397,7 +406,8 @@ export function ProductsSection() {
                                             border: p.downloadBorder,
                                         }}
                                     >
-                                        {(p as any).btnText || 'Download'} <FaDownload />
+                                        {(p as any).btnText || 'Download'}{' '}
+                                        {p.id === 'zediag' ? <FiArrowUpRight /> : <FaDownload />}
                                     </button>
                                 </div>
 
@@ -422,10 +432,18 @@ export function ProductsSection() {
                         {!isSubmitted ? (
                             <>
                                 <h3 className="ps-modal-title">
-                                    {PRODUCTS[activeTab].label} is Coming Soon!
+                                    {PRODUCTS[activeTab].id === 'zemanage' 
+                                        ? `${PRODUCTS[activeTab].label} is Coming Soon!` 
+                                        : PRODUCTS[activeTab].id === 'zediag'
+                                        ? `Know More About ${PRODUCTS[activeTab].label}`
+                                        : `Download ${PRODUCTS[activeTab].label}`}
                                 </h3>
                                 <p className="ps-modal-desc">
-                                    Please fill out the form to join waitlist.
+                                    {PRODUCTS[activeTab].id === 'zemanage'
+                                        ? 'Please fill out the form to join waitlist.'
+                                        : PRODUCTS[activeTab].id === 'zediag'
+                                        ? 'Leave your details and we will get in touch with more information.'
+                                        : 'Please fill out the form to receive the download link.'}
                                 </p>
 
                                 <form className="ps-modal-form" onSubmit={handleFormSubmit}>
@@ -450,10 +468,16 @@ export function ProductsSection() {
                             <div className="ps-modal-success">
                                 <FaCheckCircle className="ps-success-icon" />
                                 <h3 className="ps-modal-title">
-                                    Waitlist Joined!
+                                    {PRODUCTS[activeTab].id === 'zemanage' 
+                                        ? 'Waitlist Joined!' 
+                                        : 'Request Received!'}
                                 </h3>
                                 <p className="ps-modal-desc">
-                                    Thank you for your interest. We will notify you when {PRODUCTS[activeTab].label} is ready.
+                                    {PRODUCTS[activeTab].id === 'zemanage'
+                                        ? `Thank you for your interest. We will notify you when ${PRODUCTS[activeTab].label} is ready.`
+                                        : PRODUCTS[activeTab].id === 'zediag'
+                                        ? `Thank you. Our team will contact you soon with more details about ${PRODUCTS[activeTab].label}.`
+                                        : `Thank you. We have received your request for ${PRODUCTS[activeTab].label} and will get back to you shortly.`}
                                 </p>
                                 <button className="ps-form-submit btn-zestine" onClick={closeModal} style={{ marginTop: '2rem' }}>
                                     Okay

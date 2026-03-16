@@ -3,12 +3,12 @@ import { FiArrowUpRight } from 'react-icons/fi';
 import './FAQSection.css';
 
 const faqs = [
-    { id: 1, question: "What is ZeManage?", answer: "ZeManage helps AEC teams reduce project risks and operational downtime by bringing better structure and visibility to daily workflows and coordination." },
-    { id: 2, question: "Who is ZeManage for?", answer: "ZeManage is built for BIM/VDC teams, design technology leaders, and project managers working on complex AEC projects with multiple stakeholders." },
-    { id: 3, question: "Will it work with our current tools?", answer: "Yes. ZeManage is designed to integrate into existing AEC environments and support teams using multiple systems and data formats." },
-    { id: 4, question: "Do we need to change our existing workflows?", answer: "No. ZeManage works alongside your current processes and tools, allowing teams to improve consistency without disrupting how they already work." },
-    { id: 5, question: "Is ZeManage secure?", answer: "Yes. The platform supports enterprise-grade security practices and aligns with standard IT governance and access control requirements." },
-    { id: 6, question: "Will this disrupt our current project delivery?", answer: "No. ZeManage is meant to support existing processes, not interrupt them. Implementation is typically phased to avoid operational disruption." }
+    { id: 1, question: "What is Zestine Technologies?", answer: "Zestine develops intelligent BIM platforms that transform fragmented data and complex workflows into streamlined project delivery." },
+    { id: 2, question: "Who is Zestine built for?", answer: "Zestine serves AEC organizations and BIM professionals who design the built world, helping teams move from fragmented, repetitive processes to intelligent operations that scale across projects." },
+    { id: 3, question: "What expertise does Zestine bring to AEC?", answer: "With over 10 years of experience across AEC and BIM workflows, Zestine brings real-world insight to identify bottlenecks early. Its 20+ workflow accelerators are trusted by 2000+ users to improve model accuracy and reduce repetitive tasks." },
+    { id: 4, question: "What is the Zestine product suite?", answer: "Zestine’s product suite includes:\n\nZeManage - improves model performance, streamlines workflows, and proactively mitigates risks.\nZeFacility - automates schedules and space documentation.\nZeConnect - enables seamless model exports and cloud integrations.\nZeDiag - instantly diagnoses crashes and uncovers recurring issues automatically.\nAll products are built to support modern engineering operations." },
+    { id: 5, question: "How does Zestine improve AEC workflows?", answer: "Zestine replaces repetitive tasks with systems that reduce operational friction, eliminate manual documentation, improve model governance, boost data reliability, and support faster project execution." },
+    { id: 6, question: "Can Zestine integrate with existing AEC tools?", answer: "Yes. Zestine products are designed to integrate into existing AEC environments and support teams working across multiple systems and data formats." }
 ];
 
 export function FAQSection() {

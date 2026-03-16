@@ -38,7 +38,7 @@ export function Footer() {
                             <a href="#"><FaXTwitter /></a>
                             <a href="#"><FaInstagram /></a>
                             <a href="#"><FaYoutube /></a>
-                            <a href="#"><FaLinkedinIn /></a>
+                            <a href="https://www.linkedin.com/company/zestine-technologies/" target="_blank" rel="noopener noreferrer"><FaLinkedinIn /></a>
                         </div>
                     </div>
 
@@ -118,6 +118,7 @@ export function Footer() {
                         <h3 className="footer-heading">Contact Us</h3>
                         <div className="footer-heading-underline" />
                         <ul className="footer-list">
+                            <li><FaPhoneAlt className="footer-icon" /> +1 717 588 2267</li>
                             <li><FaPhoneAlt className="footer-icon" /> +1 832 206 5663</li>
                             <li><FaEnvelope className="footer-icon" /> info@zestinetech.com</li>
                         </ul>
@@ -142,7 +143,7 @@ export function Footer() {
                             <span className="action-label">Phone Number</span>
                             <div className="action-value">
                                 <FaPhoneAlt />
-                                +1 832 206 5663
+                                +1 717 588 2267
                             </div>
                         </div>
                     </div>

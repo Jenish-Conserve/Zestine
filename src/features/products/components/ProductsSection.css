@@ -23,7 +23,7 @@
     /* Dynamic height based on card */
     min-height: 100vh;
     /* Ensure it covers at least the viewport so scroll doesn't show white below */
-    padding-top: 6rem;
+    padding-top: 5rem;
     /* Push down slightly from the absolute top */
     padding-bottom: 4rem;
     display: flex;
@@ -47,8 +47,8 @@
     /* don't compress the tab row */
     z-index: 20;
     position: relative;
-    margin-top: -3rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 0.25rem;
     /* move tabs up and add space below */
 }
 
@@ -114,22 +114,22 @@
     will-change: transform, opacity;
 }
 
-/* ── Custom Card Z Background ── */
-.ps-card-bg {
+/* ── Custom Card Logo Background ── */
+.ps-card-bg-logo {
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    /* stretch full height of card */
-    width: 60%;
-    /* cover right side */
-    object-fit: cover;
-    /* fill space without stretching */
-    object-position: right center;
-    /* anchor to right edge */
+    right: 18%;
+    /* Moved further left to avoid overlap and improve composition */
+    top: 50%;
+    transform: translateY(-50%);
+    height: 80%;
+    width: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     z-index: 0;
     pointer-events: none;
-    /* opacity controlled per-card via inline filter style */
+    opacity: 0.1;
+    /* Slightly increased base opacity */
 }
 
 /* ── Top row ── */
@@ -149,9 +149,9 @@
     border-radius: 100px;
 }
 
-.ps-logo {
-    width: 120px;
-    height: auto;
+.ps-card-logo-top {
+    width: 55px !important;
+    height: 55px !important;
     object-fit: contain;
     opacity: 0.9;
 }
@@ -186,9 +186,30 @@
 }
 
 .ps-description {
-    font-size: 1.2rem;
-    line-height: 1.8;
+    font-size: 1.15rem;
+    line-height: 1.6;
     margin: 0;
+}
+
+.ps-tagline {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: -0.5rem;
+}
+
+.ps-tagline-item {
+    position: relative;
+    padding-left: 1rem;
+}
+
+.ps-tagline-item::before {
+    content: '•';
+    position: absolute;
+    left: 0;
 }
 
 .ps-download-btn {
@@ -298,8 +319,9 @@
         font-size: 0.95rem;
     }
 
-    .ps-logo {
-        width: 45px;
+    .ps-card-logo-top {
+        width: 25px !important;
+        height: 25px !important;
     }
 
     .ps-image-wrap {
@@ -474,7 +496,7 @@
         padding: 0.25rem;
         background: #fff;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
 
     .ps-tab-logo {

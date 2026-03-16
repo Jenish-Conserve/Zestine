@@ -94,10 +94,11 @@ export function WhoWeAreSection() {
                                     <span className="letter-wrapper"><span className="red-circle"></span>W</span>e saw a disconnect.
                                 </h3>
                                 <div className="wwa-paragraphs spacing-sm">
-                                    <p>Software was being built for engineering - without engineering.</p>
-                                    <p>So we reversed the model.</p>
-                                    <p>Domain experts led the design.</p>
-                                    <p>Technology became the accelerator. What began as internal tools to reduce coordination effort quickly became adopted by BIM professionals across projects - shaping the foundation for scalable digital systems built around engineering reality.</p>
+                                <ul className="wwa-list">
+                                    <li>Software was being built for engineering - without engineering.</li>
+                                    <li>So we reversed the model.</li>
+                                    <li>Domain experts led the design.</li>
+                                </ul>
                                     <p>Today, Zestine builds intelligent platforms that help AEC teams operate with clarity, precision, and control - from model governance to data coordination.</p>
                                 </div>
                             </div>
