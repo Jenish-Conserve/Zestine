@@ -128,7 +128,8 @@
     padding: 2.5rem; /* Increased padding slightly */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
     margin-right: 2rem; /* Increased gap */

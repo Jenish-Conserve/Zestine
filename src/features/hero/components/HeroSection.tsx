@@ -11,12 +11,23 @@ export function HeroSection() {
     const { elementRef: containerRef } = useGsapAnimation<HTMLDivElement>({ animation: heroRevealAnimation });
     const [isMobile, setIsMobile] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
+    const [showWhatsApp, setShowWhatsApp] = useState(false);
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+        const handleScroll = () => {
+            // Show WhatsApp only after scrolling past the hero (e.g., 600px)
+            setShowWhatsApp(window.scrollY > 600);
+        };
+
         checkMobile();
         window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     useEffect(() => {
@@ -112,10 +123,11 @@ export function HeroSection() {
                 </div>
             </section>
 
+
             {/* Floating WhatsApp button */}
             <a
-                href="https://wa.me/something"
-                className="whatsappFloat"
+                href="https://wa.me/+18322065663"
+                className={`whatsappFloat ${showWhatsApp ? 'visible' : ''}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat on WhatsApp"

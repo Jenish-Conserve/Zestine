@@ -179,13 +179,20 @@
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
 }
 
 .form-submit-btn:hover {
     background-color: #f8fafc;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: none;
+}
+
+.form-privacy-notice {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: -0.5rem;
+    line-height: 1.4;
 }
 
 /* Responsive adjustments */

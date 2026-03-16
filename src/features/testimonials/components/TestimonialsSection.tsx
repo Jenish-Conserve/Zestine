@@ -4,16 +4,28 @@ import bgImage from '../../../Images/banner/banner.jpg';
 
 const TESTIMONIALS = [
     {
-        text: 'Zestine tools helped us simplify\ncoordination across complex\nlinked models. Engineering\nTechnology Firm',
-        name: '- Jhon Doe',
+        text: '“Zestine’s products bring a practical approach to BIM automation. Their solutions are clearly designed with real project workflows in mind and have helped our team simplify several coordination tasks across Revit models.”',
+        name: '- Director of BIM',
     },
     {
-        text: 'Reduced repetitive\ndocumentation effort across\nmultiple project phases.\nBIM Technology FIRM',
-        name: '- Jhon Doe',
+        text: '“What stands out about Zestine is how their tools focus on solving everyday BIM workflow challenges. Their products integrate smoothly with existing processes and help teams work more efficiently.”',
+        name: '- Head of Digital Engineering',
     },
     {
-        text: 'Enabled our teams to focus\non design intent instead of\ndata management.\nSustainability FIRM',
-        name: '- Jhon Doe',
+        text: '“ZeConnect helped streamline how our team manages Revit links and exports model views for coordination. The workflow feels much more structured and easier to handle during project collaboration.”',
+        name: '- Senior Digital Delivery Expert',
+    },
+    {
+        text: '“With ZeFacility, generating schedules and managing space data across multiple Revit models became far more organized for our team. It reduced a lot of repetitive manual work.”',
+        name: '- Facility Management Lead',
+    },
+    {
+        text: '“Our coordination workflows involve frequent sharing of model views and linked files. ZeConnect simplified those tasks and helped our team maintain consistency across projects.”',
+        name: '- Project BIM Coordinator',
+    },
+    {
+        text: '“ZeFacility improved the way we manage room data and schedules across our BIM models. It gave our team a more reliable way to keep information organized.”',
+        name: '- VDC Manager',
     }
 ];
 
@@ -26,12 +38,15 @@ export const TestimonialsSection: React.FC = () => {
     useEffect(() => {
         if (!containerRef.current || !listRef.current) return;
 
-        // Clone all children to create the seamless loop
+        // Clone all children multiple times to ensure no gaps on very large screens
         const originalChildren = Array.from(listRef.current.children);
-        originalChildren.forEach((child) => {
-            const clone = child.cloneNode(true) as HTMLElement;
-            listRef.current!.appendChild(clone);
-        });
+        // Add 2 sets of clones for safety
+        for (let j = 0; j < 2; j++) {
+            originalChildren.forEach((child) => {
+                const clone = child.cloneNode(true) as HTMLElement;
+                listRef.current!.appendChild(clone);
+            });
+        }
 
         // Direction & Speed
         containerRef.current.style.setProperty('--animation-direction', 'forwards');
@@ -73,7 +88,7 @@ export const TestimonialsSection: React.FC = () => {
 
     return (
         <section id="testimonials" className="ts-section">
-            <h2 className="ts-title">Trusted by BIM Professionals</h2>
+            <h2 className="ts-title">Trusted by BIM professionals</h2>
             <div className="ts-layout">
                 <div ref={leftColRef} className="ts-left-col" style={{ backgroundImage: `url(${bgImage})` }}>
                     <div className="ts-left-overlay">

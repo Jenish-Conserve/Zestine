@@ -3,11 +3,12 @@ import { FiArrowUpRight } from 'react-icons/fi';
 import './FAQSection.css';
 
 const faqs = [
-    { id: 1, question: "How does BIM Coordination improve project efficiency?", answer: "By centralizing model data and automating clash detection, BIM coordination minimizes rework, aligns schedules, and ensures all stakeholders are working from a single source of truth." },
-    { id: 2, question: "Can Zestine integrate with my existing software stack?", answer: "Yes, Zestine is built with open APIs and direct plugins for major AEC tools like Revit, Navisworks, and AutoCAD, creating a seamless data flow." },
-    { id: 3, question: "Is the platform suitable for both small and large teams?", answer: "Absolutely. Zestine scales dynamically. Small teams benefit from out-of-the-box workflows, while enterprise teams can leverage advanced governance and custom reporting." },
-    { id: 4, question: "How long does it take to deploy Zestine on a new project?", answer: "Most teams are up and running within a few days. Our templates and intuitive UI minimize the learning curve compared to traditional dense BIM software." },
-    { id: 5, question: "What kind of support is included?", answer: "Every tier includes dedicated technical support from AEC professionals who understand your specific challenges, not just generic IT helpdesk agents." }
+    { id: 1, question: "What is ZeManage?", answer: "ZeManage helps AEC teams reduce project risks and operational downtime by bringing better structure and visibility to daily workflows and coordination." },
+    { id: 2, question: "Who is ZeManage for?", answer: "ZeManage is built for BIM/VDC teams, design technology leaders, and project managers working on complex AEC projects with multiple stakeholders." },
+    { id: 3, question: "Will it work with our current tools?", answer: "Yes. ZeManage is designed to integrate into existing AEC environments and support teams using multiple systems and data formats." },
+    { id: 4, question: "Do we need to change our existing workflows?", answer: "No. ZeManage works alongside your current processes and tools, allowing teams to improve consistency without disrupting how they already work." },
+    { id: 5, question: "Is ZeManage secure?", answer: "Yes. The platform supports enterprise-grade security practices and aligns with standard IT governance and access control requirements." },
+    { id: 6, question: "Will this disrupt our current project delivery?", answer: "No. ZeManage is meant to support existing processes, not interrupt them. Implementation is typically phased to avoid operational disruption." }
 ];
 
 export function FAQSection() {
@@ -53,13 +54,14 @@ export function FAQSection() {
                 {/* Right Side: Contact Form */}
                 <div className="faq-right">
                     <div className="contact-form-card">
-                        <h3 className="form-title">Talk to us</h3>
+                        <h3 className="form-title">Get Started with Zestine</h3>
                         <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-                            <input type="text" placeholder="Name" required />
-                            <input type="email" placeholder="Email" required />
-                            <input type="tel" placeholder="Phone Number" required />
-                            <input type="text" placeholder="Company Name" />
-                            <textarea placeholder="Your Suggestion" rows={4} required></textarea>
+                            <input type="text" placeholder="Name *" required />
+                            <input type="email" placeholder="Email *" required />
+                            <input type="tel" placeholder="Phone Number" />
+                            <input type="text" placeholder="Company Name *" required />
+                            <textarea placeholder="Tell us about your requirements / problems" rows={4} required></textarea>
+                            <p className="form-privacy-notice">Your information is safe with us. We respect your privacy and never spam.</p>
                             <div className="form-submit-wrapper">
                                 <button type="submit" className="form-submit-btn btn-zestine">
                                     Submit

@@ -23,10 +23,6 @@
     transform: translateY(0);
 }
 
-.navbar--hidden {
-    transform: translateY(-150%);
-}
-
 .nav-links {
     display: flex;
     gap: 3rem;

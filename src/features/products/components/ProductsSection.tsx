@@ -7,12 +7,14 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import zeManageIcon from '../../../Images/product/logo/Ze manage.png';
 import zeFacilityIcon from '../../../Images/product/logo/Ze facility.png';
 import zeConnectIcon from '../../../Images/product/logo/Ze connect_png.png';
+import zeDiagIcon from '../../../Images/product/logo-color.png';
 import zbgImg from '../../../Images/product/product bg z.png';
 import zemanageImg from '../../../Images/product/zemanage.jpg';
 import zefacilityImg from '../../../Images/product/zefacility.jpg';
 import zeManageOutline from '../../../Images/product/logo/Ze manage.png';
 import zeFacilityOutline from '../../../Images/product/outline logos/Zefacily final_outline & white logo-01.png';
 import zeConnectOutline from '../../../Images/product/outline logos/ze connect_outline & white logo-01.png';
+import zeDiagOutline from '../../../Images/product/logo-color.png';
 import clrbgImg from '../../../Images/product/clrbg.png';
 import './ProductsSection.css';
 
@@ -23,19 +25,20 @@ const PRODUCTS = [
         id: 'zemanage',
         label: 'ZeManage',
         description:
-            'Govern BIM environments in real-time with centralized monitoring and standards enforcement, without interrupting design workflows.',
+            'An intelligent BIM platform that improves model performance and streamlines workflows. Smarter BIM environments, lower project risks.',
         bg: '#ffffff',
         cardBg: '#ffffff',
         textColor: '#0f172a',
         subTextColor: '#475569',
-        badgeBg: '#ffe4e6',      // light red-pink pill
+        badgeBg: '#ffe4e6',
         badgeText: '#f43f5e',
-        downloadBg: '#f04141',   // Red button
+        downloadBg: '#f04141',
         downloadText: '#ffffff',
         downloadBorder: 'none',
         tabAccent: '#0f172a',
         logo: zeManageOutline,
         tabLogo: zeManageIcon,
+        btnText: 'Join Waitlist',
         zFilter: 'brightness(0) invert(1) opacity(0.15)',
         image: zemanageImg,
         bgImage: clrbgImg,
@@ -44,19 +47,20 @@ const PRODUCTS = [
         id: 'zefacility',
         label: 'ZeFacility',
         description:
-            'Automate schedules, space creation, and documentation to simplify data coordination across project teams.',
+            'Automate schedule generation, import/export data, and manage spaces effortlessly across Revit models. Smarter schedules, simpler facility management.',
         bg: '#074C91',
         cardBg: '#074C91',
         textColor: '#ffffff',
         subTextColor: 'rgba(255,255,255,0.75)',
-        badgeBg: '#ffffff',      // white pill on blue card
-        badgeText: '#111827',    // dark text
-        downloadBg: '#ffffff',   // White button
+        badgeBg: '#ffffff',
+        badgeText: '#111827',
+        downloadBg: '#ffffff',
         downloadText: '#111827',
         downloadBorder: 'none',
         tabAccent: '#1a4490',
         logo: zeFacilityOutline,
         tabLogo: zeFacilityIcon,
+        btnText: 'Join Waitlist',
         image: zefacilityImg,
         bgImage: zbgImg,
     },
@@ -64,19 +68,41 @@ const PRODUCTS = [
         id: 'zeconnect',
         label: 'ZeConnect',
         description:
-            'Streamline model export and link management with intelligent cloud-enabled integrations.',
+            'Streamline Revit workflows by exporting 3D views and managing links effortlessly from a centralized BIM hub. Seamless connections, smarter workflows.',
         bg: '#FC424F',
         cardBg: '#FC424F',
         textColor: '#ffffff',
         subTextColor: 'rgba(255,255,255,0.80)',
-        badgeBg: '#ffffff',      // white pill on red card
-        badgeText: '#111827',    // dark text
-        downloadBg: '#ffffff',   // White button
+        badgeBg: '#ffffff',
+        badgeText: '#111827',
+        downloadBg: '#ffffff',
         downloadText: '#111827',
         downloadBorder: 'none',
         tabAccent: '#f04141',
         logo: zeConnectOutline,
         tabLogo: zeConnectIcon,
+        btnText: 'Join Waitlist',
+        image: zemanageImg,
+        bgImage: zbgImg,
+    },
+    {
+        id: 'zediag',
+        label: 'ZeDiag',
+        description:
+            'Instantly diagnose Revit crashes by analyzing journal files and uncover issues without manual log scanning. Turn crash logs into insights.',
+        bg: '#0f172a',
+        cardBg: '#0f172a',
+        textColor: '#ffffff',
+        subTextColor: 'rgba(255,255,255,0.75)',
+        badgeBg: '#ffffff',
+        badgeText: '#111827',
+        downloadBg: '#ffffff',
+        downloadText: '#111827',
+        downloadBorder: 'none',
+        tabAccent: '#0f172a',
+        logo: zeDiagOutline,
+        tabLogo: zeDiagIcon,
+        btnText: 'Join Waitlist',
         image: zemanageImg,
         bgImage: zbgImg,
     },
@@ -216,14 +242,13 @@ export function ProductsSection() {
                 scrub: 1.5,
                 refreshPriority: 5, // Calculate after WhoWeAre pin space
                 onUpdate: (self) => {
-                    // There are 3 cards, so progress maps linearly:
-                    // 0.0 - 0.33 -> 0
-                    // 0.33 - 0.66 -> 1
-                    // 0.66 - 1.0 -> 2
-                    let newIndex = Math.min(
-                        cards.length - 1,
-                        Math.floor(self.progress * cards.length)
-                    );
+                    const totalDuration = 2 * (cards.length - 1) + 1;
+                    const currentTime = self.progress * totalDuration;
+
+                    // Each card i gets a hold at [2*i - 0.5, 2*i + 1.5]
+                    // This is a robust way to map currentTime to activeIndex
+                    let newIndex = Math.floor((currentTime + 0.5) / 2);
+                    newIndex = Math.max(0, Math.min(newIndex, cards.length - 1));
 
                     if (activeIndexRef.current !== newIndex) {
                         setActiveTab(newIndex);
@@ -266,7 +291,7 @@ export function ProductsSection() {
     }, { scope: wrapperRef });
 
     // Wrapper height = (2*(n-1) + 1) chapters × 100vh each
-    // So: 3 cards → 5 chapters → 500vh total
+    // So: 4 cards → 7 chapters → 700vh total
     const numChapters = 2 * (PRODUCTS.length - 1) + 1;
     const totalScrollVh = numChapters * 100;
 
@@ -283,28 +308,15 @@ export function ProductsSection() {
                 {/* Tab row: active tab border matches the current card accent */}
                 <div className="ps-tabs">
                     {PRODUCTS.map((prod, i) => {
-                        // Calculate CSS order to keep active tab in center (order 2)
-                        // This ensures that regardless of which index is active, 
-                        // it stays in the middle of the 3-tab layout.
-                        let order = 1;
-                        if (i === activeTab) {
-                            order = 2; // Middle
-                        } else if (i === (activeTab + 1) % PRODUCTS.length) {
-                            order = 3; // Right
-                        } else {
-                            order = 1; // Left
-                        }
-
                         return (
                             <div
                                 key={prod.id}
-                                className={`ps-tab-wrapper ${i !== activeTab ? 'ps-tab-hidden-mobile' : ''}`}
+                                className="ps-tab-wrapper"
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '0.75rem',
                                     cursor: 'pointer',
-                                    order: order
                                 }}
                                 onClick={() => handleTabClick(i)}
                             >
@@ -312,6 +324,10 @@ export function ProductsSection() {
                                     src={prod.tabLogo}
                                     alt=""
                                     className={`ps-tab-logo ${i !== activeTab ? 'ps-tab-logo-inactive' : ''}`}
+                                    style={{
+                                        width: prod.id === 'zediag' ? '45px' : '100px',
+                                        height: 'auto'
+                                    }}
                                 />
                                 <button
                                     ref={(el) => { if (el) tabRefs.current[i] = el; }}
@@ -352,7 +368,15 @@ export function ProductsSection() {
                                 >
                                     Product
                                 </span>
-                                <img src={p.logo} alt="Zestine logo" className="ps-logo" />
+                                <img
+                                    src={p.logo}
+                                    alt="Zestine logo"
+                                    className="ps-logo"
+                                    style={{
+                                        width: p.id === 'zediag' ? '60px' : '150px',
+                                        height: 'auto'
+                                    }}
+                                />
                             </div>
 
                             {/* Product name */}
@@ -373,7 +397,7 @@ export function ProductsSection() {
                                             border: p.downloadBorder,
                                         }}
                                     >
-                                        Download <FaDownload />
+                                        {(p as any).btnText || 'Download'} <FaDownload />
                                     </button>
                                 </div>
 
@@ -397,8 +421,12 @@ export function ProductsSection() {
 
                         {!isSubmitted ? (
                             <>
-                                <h3 className="ps-modal-title">Download Request</h3>
-                                <p className="ps-modal-desc">Please fill out the form below to initiate your download.</p>
+                                <h3 className="ps-modal-title">
+                                    {PRODUCTS[activeTab].label} is Coming Soon!
+                                </h3>
+                                <p className="ps-modal-desc">
+                                    Please fill out the form to join waitlist.
+                                </p>
 
                                 <form className="ps-modal-form" onSubmit={handleFormSubmit}>
                                     <div className="ps-form-group">
@@ -421,8 +449,12 @@ export function ProductsSection() {
                         ) : (
                             <div className="ps-modal-success">
                                 <FaCheckCircle className="ps-success-icon" />
-                                <h3 className="ps-modal-title">Download Ready!</h3>
-                                <p className="ps-modal-desc">Your download will begin shortly. Thank you for choosing Zestine.</p>
+                                <h3 className="ps-modal-title">
+                                    Waitlist Joined!
+                                </h3>
+                                <p className="ps-modal-desc">
+                                    Thank you for your interest. We will notify you when {PRODUCTS[activeTab].label} is ready.
+                                </p>
                                 <button className="ps-form-submit btn-zestine" onClick={closeModal} style={{ marginTop: '2rem' }}>
                                     Okay
                                 </button>

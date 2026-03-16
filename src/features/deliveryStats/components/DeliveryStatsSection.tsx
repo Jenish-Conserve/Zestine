@@ -3,10 +3,10 @@ import './DeliveryStatsSection.css';
 
 const STATS = [
     { value: '10+', label: 'Years on AEC' },
-    { value: '20+', label: 'AEC Workflow Accelerators' },
-    { value: '200+', label: 'Trusted Users' },
+    { value: '30%', label: 'project costs are reduced' },
+    { value: '2000+', label: 'Trusted Users' },
     { value: '100%', label: 'AEC-Focused' },
-    { value: '50+', label: 'Projects Delivered' },
+    { value: '90%', label: 'of manual workflows automated' },
     { value: '5★', label: 'Client Satisfaction' },
 ];
 

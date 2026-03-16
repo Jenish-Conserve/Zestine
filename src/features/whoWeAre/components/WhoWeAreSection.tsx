@@ -78,7 +78,7 @@ export function WhoWeAreSection() {
                             {/* Block 2 */}
                             <div className="wwa-text-content wwa-stacked-text" ref={assignTextRef(1)}>
                                 <h3 className="wwa-heading">
-                                    <span className="letter-wrapper"><span className="red-circle"></span>D</span>espite powerful AEC tools, real-world project<br />delivery remained slowed by:
+                                    <span className="letter-wrapper"><span className="red-circle"></span>D</span>espite powerful AEC tools, real-world project delivery remained slowed by:
                                 </h3>
                                 <ul className="wwa-list">
                                     <li>Workflow friction</li>

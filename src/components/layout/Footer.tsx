@@ -32,7 +32,7 @@ export function Footer() {
                             <img src={logoImg} alt="Zestine" />
                         </Link>
                         <p className="footer-description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus leo mi, malesuada eget ultrices at.Lorem ipsum dolor sit amet
+                            Engineering-first SaaS products designed for real-world AEC project workflows.
                         </p>
                         <div className="footer-socials">
                             <a href="#"><FaXTwitter /></a>
@@ -109,9 +109,7 @@ export function Footer() {
                         <h3 className="footer-heading">Our Locations</h3>
                         <div className="footer-heading-underline" />
                         <ul className="footer-list">
-                            <li><FaMapMarkerAlt className="footer-icon" /> India</li>
-                            <li><FaMapMarkerAlt className="footer-icon" /> Dubai, UAE</li>
-                            <li><FaMapMarkerAlt className="footer-icon" /> USA</li>
+                            <li><FaMapMarkerAlt className="footer-icon" /> 295 Millers Run Rd Ste 2 Bridgeville, <br />PA, 15017-1361 United States</li>
                         </ul>
                     </div>
 
@@ -120,8 +118,8 @@ export function Footer() {
                         <h3 className="footer-heading">Contact Us</h3>
                         <div className="footer-heading-underline" />
                         <ul className="footer-list">
-                            <li><FaPhoneAlt className="footer-icon" /> +91 987654321</li>
-                            <li><FaEnvelope className="footer-icon" /> info@company.com</li>
+                            <li><FaPhoneAlt className="footer-icon" /> +1 832 206 5663</li>
+                            <li><FaEnvelope className="footer-icon" /> info@zestinetech.com</li>
                         </ul>
                     </div>
                 </div>
@@ -130,21 +128,21 @@ export function Footer() {
                 <div className="footer-action-card">
                     <div className="action-col">
                         <h2>Get in touch with us</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Have questions about Zestine? Our team is ready to help!</p>
                     </div>
                     <div className="action-col flex-row">
                         <div className="action-item">
                             <span className="action-label">Email</span>
                             <div className="action-value">
                                 <FaEnvelope />
-                                info@company.com
+                                info@zestinetech.com
                             </div>
                         </div>
                         <div className="action-item">
                             <span className="action-label">Phone Number</span>
                             <div className="action-value">
                                 <FaPhoneAlt />
-                                +91 987654321
+                                +1 832 206 5663
                             </div>
                         </div>
                     </div>

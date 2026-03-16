@@ -23,7 +23,7 @@
     /* Dynamic height based on card */
     min-height: 100vh;
     /* Ensure it covers at least the viewport so scroll doesn't show white below */
-    padding-top: 8rem;
+    padding-top: 6rem;
     /* Push down slightly from the absolute top */
     padding-bottom: 4rem;
     display: flex;
@@ -31,7 +31,7 @@
     align-items: center;
     justify-content: flex-start;
     /* Align to top instead of strictly centering */
-    gap: 2rem;
+    gap: 1rem;
     overflow: hidden;
     z-index: 10;
     box-sizing: border-box;
@@ -48,7 +48,7 @@
     z-index: 20;
     position: relative;
     margin-top: -3rem;
-    margin-bottom: 4rem;
+    margin-bottom: 0.5rem;
     /* move tabs up and add space below */
 }
 
@@ -173,9 +173,8 @@
     z-index: 1;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-top: auto;
-    padding-top: 2rem;
+    align-items: flex-start;
+    padding-top: 1rem;
     gap: 2rem;
 }
 
@@ -457,33 +456,45 @@
 /* ── Mobile Responsiveness ── */
 @media (max-width: 768px) {
     .ps-tabs {
-        flex-direction: column;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         width: 100%;
         padding: 0 1rem;
-        gap: 1rem;
-        margin-bottom: 0.5rem;
-        /* Reduced space between tabs and card */
+        gap: 0.75rem;
+        margin-bottom: 2rem;
     }
 
     .ps-tab-wrapper {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .ps-tab-hidden-mobile {
-        display: none !important;
+        display: flex !important;
+        flex-direction: row;
+        gap: 0.5rem;
+        min-width: 0;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0.25rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .ps-tab-logo {
-        width: 48px;
-        height: 48px;
+        width: 30px !important;
+        height: auto !important;
+        max-width: 100%;
     }
 
     .ps-tab {
-        flex: 1;
-        /* Stretch to fill remaining width */
-        padding: 0.8rem 1rem;
-        font-size: 1.05rem;
-        text-align: center;
+        width: 100%;
+        padding: 0.4rem 0.2rem;
+        font-size: 0.75rem;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: none !important;
+    }
+
+    .ps-tab-hidden-mobile {
+        display: flex !important;
     }
 }
