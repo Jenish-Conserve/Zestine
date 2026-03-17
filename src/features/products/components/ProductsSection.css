@@ -117,7 +117,7 @@
 /* ── Custom Card Logo Background ── */
 .ps-card-bg-logo {
     position: absolute;
-    right: 18%;
+    right: 32%;
     /* Moved further left to avoid overlap and improve composition */
     top: 50%;
     transform: translateY(-50%);
@@ -244,6 +244,10 @@
     background: transparent;
 }
 
+.ps-image-straight {
+    transform: translateY(-140px) rotate(0deg) !important;
+}
+
 .ps-product-image {
     width: 100%;
     height: 100%;
@@ -257,7 +261,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4rem;
+    gap: 8.5rem;
     /* Increased space between tagline and GIF */
     flex-shrink: 0;
     margin-top: -3rem;
@@ -279,9 +283,13 @@
     border-radius: 12px;
     border: none;
     overflow: hidden;
-    margin-top: -3.8rem;
+    margin-top: -7rem;
     /* Shifted even further up */
     transform: translateY(-10px) rotate(2deg);
+}
+
+.ps-tagline-straight {
+    transform: translateY(-10px) rotate(0deg) !important;
 }
 
 .ps-dynamic-tagline-item {

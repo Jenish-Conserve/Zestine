@@ -19,8 +19,7 @@ export function Footer() {
                     style={{ '--bg-pattern': `url('${footerPattern}')` } as React.CSSProperties}
                 />
 
-                {/* Watermark text */}
-                <h1 className="footer-watermark">Zestine</h1>
+
             </div>
 
             <div className="footer-content">
@@ -52,11 +51,6 @@ export function Footer() {
                                 const el = document.getElementById('hero');
                                 if (el) gsap.to(window, { duration: 1, scrollTo: el, ease: 'power3.inOut' });
                             }}>Home</a>
-                            <a href="#who-we-are" onClick={(e) => {
-                                e.preventDefault();
-                                const el = document.getElementById('who-we-are');
-                                if (el) gsap.to(window, { duration: 1, scrollTo: el, ease: 'power3.inOut' });
-                            }}>About us</a>
                             <a href="#who-we-are" onClick={(e) => {
                                 e.preventDefault();
                                 const el = document.getElementById('who-we-are');
@@ -101,12 +95,19 @@ export function Footer() {
                                     element.scrollIntoView({ behavior: 'smooth' });
                                 }
                             }}>ZeConnect</a>
+                            <a href="#products" onClick={(e) => {
+                                e.preventDefault();
+                                const element = document.getElementById('products');
+                                if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}>ZeDiag</a>
                         </nav>
                     </div>
 
                     {/* Column 4: Locations */}
                     <div className="footer-col location-col">
-                        <h3 className="footer-heading">Our Locations</h3>
+                        <h3 className="footer-heading">Find us at</h3>
                         <div className="footer-heading-underline" />
                         <ul className="footer-list">
                             <li><FaMapMarkerAlt className="footer-icon" /> 295 Millers Run Rd Ste 2 Bridgeville, <br />PA, 15017-1361 United States</li>

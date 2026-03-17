@@ -40,7 +40,7 @@ export const DeliveryStatsSection: React.FC = () => {
                     Designed for Real<br />World Delivery
                 </h2>
 
-                <div className="ds-watermark">Zestine</div>
+                <div className="ds-watermark"></div>
 
                 {/* Scroller — Aceternity mask-fade style */}
                 <div ref={containerRef} className="ds-scroller">

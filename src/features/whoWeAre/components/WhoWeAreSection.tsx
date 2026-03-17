@@ -31,7 +31,7 @@ export function WhoWeAreSection() {
     return (
         <section className="wwa-section" id="who-we-are" ref={sectionRef}>
             <div className="wwa-pin-container" ref={pinContainerRef}>
-                <div className="wwa-bg-word" aria-hidden="true">ZESTINE</div>
+                <div className="wwa-bg-word" aria-hidden="true"></div>
 
                 <div className="wwa-container">
                     <header className="wwa-header">

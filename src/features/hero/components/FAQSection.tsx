@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
+import { FaCheckCircle } from 'react-icons/fa';
 import './FAQSection.css';
 
 const faqs = [
@@ -89,34 +90,45 @@ export function FAQSection() {
                 <div className="faq-right">
                     <div className="contact-form-card">
                         <h3 className="form-title">Get Started with Zestine</h3>
-                        {isSubmitted ? (
-                            <div className="form-success">
-                                <h3>Thank You!</h3>
-                                <p>Your message has been sent successfully. We'll get back to you soon.</p>
-                                <button className="btn-zestine" onClick={() => setIsSubmitted(false)}>Send Another</button>
+                        <form className="contact-form" onSubmit={handleSubmit}>
+                            <input name="name" type="text" placeholder="Name *" required />
+                            <input
+                                name="email"
+                                type="email"
+                                placeholder="Email *"
+                                required
+                                onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('please enter proper email')}
+                                onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+                            />
+                            <input name="phone" type="tel" placeholder="Phone Number" />
+                            <input name="company" type="text" placeholder="Company Name *" required />
+                            <textarea name="requirements" placeholder="Tell us about your requirements / problems" rows={4}></textarea>
+                            {isError && <p className="form-error-text">Failed to send message. Please try again.</p>}
+                            <p className="form-privacy-notice">Your information is safe with us. We respect your privacy and never spam.</p>
+                            <div className="form-submit-wrapper">
+                                <button type="submit" className="form-submit-btn btn-zestine">
+                                    Submit
+                                </button>
                             </div>
-                        ) : (
-                            <form className="contact-form" onSubmit={handleSubmit}>
-                                <input name="name" type="text" placeholder="Name *" required />
-                                <input 
-                                    name="email"
-                                    type="email" 
-                                    placeholder="Email *" 
-                                    required 
-                                    onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('please enter proper email')}
-                                    onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
-                                />
-                                <input name="phone" type="tel" placeholder="Phone Number *" required />
-                                <input name="company" type="text" placeholder="Company Name *" required />
-                                <textarea name="requirements" placeholder="Tell us about your requirements / problems" rows={4} required></textarea>
-                                {isError && <p className="form-error-text">Failed to send message. Please try again.</p>}
-                                <p className="form-privacy-notice">Your information is safe with us. We respect your privacy and never spam.</p>
-                                <div className="form-submit-wrapper">
-                                    <button type="submit" className="form-submit-btn btn-zestine">
-                                        Submit
+                        </form>
+
+                        {/* Success Dialogue Overlay */}
+                        {isSubmitted && (
+                            <div className="contact-success-overlay">
+                                <div className="contact-success-dialog">
+                                    <FaCheckCircle className="contact-success-icon" />
+                                    <h3 className="contact-success-title">Thank You!</h3>
+                                    <p className="contact-success-desc">
+                                        Your response has been recorded successfully. We will get back to you soon.
+                                    </p>
+                                    <button 
+                                        className="btn-zestine success-close-btn" 
+                                        onClick={() => setIsSubmitted(false)}
+                                    >
+                                        Okay
                                     </button>
                                 </div>
-                            </form>
+                            </div>
                         )}
                     </div>
                 </div>

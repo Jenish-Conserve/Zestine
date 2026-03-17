@@ -38,7 +38,7 @@ export default function NanoParticles() {
         baseY: y,
         vx: (Math.random() - 0.5) * 0.3, // Much slower random drift
         vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2.0 + 1.0, // Larger for visibility
+        size: Math.random() * 0.8 + 0.2, // Reduced radius for subtler look
         opacity: Math.random() * 0.4 + 0.4, // More opaque base
         offsetX: 0,
         offsetY: 0,
@@ -82,7 +82,7 @@ export default function NanoParticles() {
           baseY: y,
           vx: (Math.random() - 0.5) * 0.3,
           vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 2.0 + 1.0,
+          size: Math.random() * 1.2 + 0.5,
           opacity: Math.random() * 0.4 + 0.4,
           offsetX: 0,
           offsetY: 0,

@@ -52,7 +52,7 @@ export const TestimonialsSection: React.FC = () => {
 
         // Direction & Speed
         containerRef.current.style.setProperty('--animation-direction', 'forwards');
-        containerRef.current.style.setProperty('--animation-duration', '50s'); 
+        containerRef.current.style.setProperty('--animation-duration', '50s');
 
         setStarted(true);
     }, []);
@@ -96,7 +96,7 @@ export const TestimonialsSection: React.FC = () => {
             <div className="ts-overlay"></div>
 
             <div className="ts-content-wrapper">
-                <h2 className="ts-title">Trusted by BIM professionals</h2>
+                <h2 className="ts-title">Trusted by AEC professionals</h2>
                 <div className="ts-layout">
                     <div ref={leftColRef} className="ts-left-col" style={{ backgroundImage: `url(${bgImage})` }}>
                         <div className="ts-left-overlay">

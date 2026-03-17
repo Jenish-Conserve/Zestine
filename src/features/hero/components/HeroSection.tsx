@@ -45,8 +45,7 @@ export function HeroSection() {
                             <span className="heroTitleRed">Amplified.</span>
                         </h1>
                         <p className="heroSubhead">
-                            Built for the people designing<br />
-                            the world we live in.
+                            Built for the people designing the world we live in.
                         </p>
                     </div>
                     <div className="heroRight">
@@ -66,14 +65,14 @@ export function HeroSection() {
                             >
                                 Products
                             </button>
-                            <button 
+                            <button
                                 className="btnSecondary"
                                 onClick={() => {
                                     const el = document.getElementById('contact');
                                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                                 }}
                             >
-                                Contact with experts
+                                Connect with experts
                             </button>
                         </div>
                     </div>

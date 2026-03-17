@@ -193,7 +193,6 @@ export function ProductsSection() {
         const data = {
             name: formData.get('name'),
             email: formData.get('email'),
-            phone: formData.get('phone'),
             company: formData.get('company'),
             location: formData.get('location'),
             product: PRODUCTS[activeTab].label,
@@ -412,9 +411,9 @@ export function ProductsSection() {
                             style={{ backgroundColor: p.cardBg }}
                         >
                             {/* Background Logo Overlay */}
-                            <div 
+                            <div
                                 className="ps-card-bg-logo"
-                                style={{ 
+                                style={{
                                     backgroundImage: `url('${(p as any).bgImage}')`,
                                     filter: p.id === 'zemanage' ? (p as any).zFilter : 'none'
                                 }}
@@ -425,13 +424,11 @@ export function ProductsSection() {
                                     className="ps-badge"
                                     style={{ backgroundColor: p.badgeBg, color: p.badgeText }}
                                 >
-                                    {p.id === 'zemanage' ? 'Coming soon!!' : 'Product'}
+                                    {p.id === 'zemanage' ? 'Coming soon!!' : 
+                                     p.id === 'zeconnect' ? 'Most Downloads' :
+                                     p.id === 'zefacility' ? 'Fast Growing' :
+                                     p.id === 'zediag' ? 'Highly Recommended' : 'Product'}
                                 </span>
-                                <img
-                                    src={p.logo}
-                                    alt="Zestine logo"
-                                    className="ps-card-logo-top"
-                                />
                             </div>
 
                             {/* Product name */}
@@ -465,12 +462,12 @@ export function ProductsSection() {
 
                                 {/* Right Side: Tagline Block + Image */}
                                 <div className="ps-card-right">
-                                    {/* Dynamic Tagline Standalone Block */}
+                                    {/* Dynamic Tagline Standalone Block - straightened for all products */}
                                     {p.tagline && (
-                                        <div className="ps-dynamic-tagline-block">
+                                        <div className="ps-dynamic-tagline-block ps-tagline-straight">
                                             {p.tagline.split('\n').map((line: string, idx: number) => (
-                                                <div 
-                                                    key={idx} 
+                                                <div
+                                                    key={idx}
                                                     className={`ps-dynamic-tagline-item ${idx === taglineIndex ? 'active' : ''}`}
                                                     style={{ color: p.textColor }}
                                                 >
@@ -479,9 +476,9 @@ export function ProductsSection() {
                                             ))}
                                         </div>
                                     )}
-                                    
-                                    {/* Tilted image */}
-                                    <div className="ps-image-wrap">
+
+                                    {/* Tilted image - straightened and moved up for all products */}
+                                    <div className="ps-image-wrap ps-image-straight">
                                         <img src={p.image} alt={p.label} className="ps-product-image" />
                                     </div>
                                 </div>
@@ -502,18 +499,18 @@ export function ProductsSection() {
                         {!isSubmitted ? (
                             <>
                                 <h3 className="ps-modal-title">
-                                    {PRODUCTS[activeTab].id === 'zemanage' 
-                                        ? `${PRODUCTS[activeTab].label} is Coming Soon!` 
+                                    {PRODUCTS[activeTab].id === 'zemanage'
+                                        ? `${PRODUCTS[activeTab].label} is Coming Soon!`
                                         : PRODUCTS[activeTab].id === 'zediag'
-                                        ? `Know More About ${PRODUCTS[activeTab].label}`
-                                        : `Download ${PRODUCTS[activeTab].label}`}
+                                            ? `Know More About ${PRODUCTS[activeTab].label}`
+                                            : `Download ${PRODUCTS[activeTab].label}`}
                                 </h3>
                                 <p className="ps-modal-desc">
                                     {PRODUCTS[activeTab].id === 'zemanage'
                                         ? 'Please fill out the form to join waitlist.'
                                         : PRODUCTS[activeTab].id === 'zediag'
-                                        ? 'Leave your details and we will get in touch with more information.'
-                                        : 'Please fill out the form to get the product.'}
+                                            ? 'Leave your details and we will get in touch with more information.'
+                                            : 'Please fill out the form to get the product.'}
                                 </p>
 
                                 <form className="ps-modal-form" onSubmit={handleFormSubmit}>
@@ -521,24 +518,21 @@ export function ProductsSection() {
                                         <input name="name" type="text" placeholder="Name *" required className="ps-form-input" />
                                     </div>
                                     <div className="ps-form-group">
-                                        <input 
+                                        <input
                                             name="email"
-                                            type="email" 
-                                            placeholder="Email *" 
-                                            required 
+                                            type="email"
+                                            placeholder="Email *"
+                                            required
                                             className="ps-form-input"
                                             onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('please enter proper email')}
                                             onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
                                         />
                                     </div>
                                     <div className="ps-form-group">
-                                        <input name="phone" type="tel" placeholder="Phone Number *" required className="ps-form-input" />
-                                    </div>
-                                    <div className="ps-form-group">
                                         <input name="company" type="text" placeholder="Company *" required className="ps-form-input" />
                                     </div>
                                     <div className="ps-form-group">
-                                        <input name="location" type="text" placeholder="Location *" required className="ps-form-input" />
+                                        <input name="location" type="text" placeholder="Location" className="ps-form-input" />
                                     </div>
                                     {isError && <p className="ps-form-error">Failed to send request. Please try again.</p>}
                                     <button type="submit" className="ps-form-submit btn-zestine">
@@ -550,20 +544,20 @@ export function ProductsSection() {
                             <div className="ps-modal-success">
                                 <FaCheckCircle className="ps-success-icon" />
                                 <h3 className="ps-modal-title">
-                                    {PRODUCTS[activeTab].id === 'zemanage' 
-                                        ? 'Waitlist Joined!' 
+                                    {PRODUCTS[activeTab].id === 'zemanage'
+                                        ? 'Waitlist Joined!'
                                         : 'Request Received!'}
                                 </h3>
                                 <p className="ps-modal-desc">
                                     {PRODUCTS[activeTab].id === 'zemanage'
                                         ? `Thank you for your interest. We will notify you when ${PRODUCTS[activeTab].label} is ready.`
                                         : PRODUCTS[activeTab].id === 'zediag'
-                                        ? `Thank you. Our team will contact you soon with more details about ${PRODUCTS[activeTab].label}.`
-                                        : `Thank you. We have received your request for ${PRODUCTS[activeTab].label} and will get back to you shortly.`}
+                                            ? `Thank you. Our team will contact you soon with more details about ${PRODUCTS[activeTab].label}.`
+                                            : `Thank you. We have received your request for ${PRODUCTS[activeTab].label} and will get back to you shortly.`}
                                 </p>
-                                <button 
-                                    className="ps-form-submit btn-zestine" 
-                                    onClick={closeModal} 
+                                <button
+                                    className="ps-form-submit btn-zestine"
+                                    onClick={closeModal}
                                     style={{ marginTop: '2rem' }}
                                 >
                                     Okay
@@ -571,9 +565,9 @@ export function ProductsSection() {
 
                                 {(PRODUCTS[activeTab].id === 'zeconnect' || PRODUCTS[activeTab].id === 'zefacility') && (
                                     <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#64748b' }}>
-                                        Didn't start? <a 
-                                            href={PRODUCTS[activeTab].id === 'zeconnect' ? '/ZeConnect_Setup.exe' : '/ZeFacility_Setup.exe'} 
-                                            download 
+                                        Didn't start? <a
+                                            href={PRODUCTS[activeTab].id === 'zeconnect' ? '/ZeConnect_Setup.exe' : '/ZeFacility_Setup.exe'}
+                                            download
                                             style={{ color: '#ef4444', textDecoration: 'underline' }}
                                         >
                                             Click here to download manually
