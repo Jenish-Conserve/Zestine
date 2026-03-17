@@ -70,8 +70,10 @@ export function WhoWeAreSection() {
                                     <span className="letter-wrapper"><span className="red-circle"></span>B</span>orn in Engineering. Built<br />for Operations.
                                 </h3>
                                 <div className="wwa-paragraphs">
-                                    <p>Zestine was built by professionals who lived those workflows first.</p>
-                                    <p>It started inside an engineering office where highly capable teams were still caught in manual coordination, disconnected data, and repetitive execution.</p>
+                                    <ul className="wwa-list">
+                                        <li>Zestine was built by professionals who lived those workflows first.</li>
+                                        <li>It started inside an engineering office where highly capable teams were still caught in manual coordination, disconnected data, and repetitive execution.</li>
+                                    </ul>
                                 </div>
                             </div>
 
@@ -94,12 +96,12 @@ export function WhoWeAreSection() {
                                     <span className="letter-wrapper"><span className="red-circle"></span>W</span>e saw a disconnect.
                                 </h3>
                                 <div className="wwa-paragraphs spacing-sm">
-                                <ul className="wwa-list">
-                                    <li>Software was being built for engineering - without engineering.</li>
-                                    <li>So we reversed the model.</li>
-                                    <li>Domain experts led the design.</li>
-                                </ul>
-                                    <p>Today, Zestine builds intelligent platforms that help AEC teams operate with clarity, precision, and control - from model governance to data coordination.</p>
+                                    <ul className="wwa-list">
+                                        <li>Software was being built for engineering - without engineering.</li>
+                                        <li>So we reversed the model.</li>
+                                        <li>Domain experts led the design.</li>
+                                        <li>Today, Zestine builds intelligent platforms that help AEC teams operate with clarity, precision, and control.</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
