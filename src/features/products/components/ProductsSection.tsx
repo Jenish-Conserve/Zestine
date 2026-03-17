@@ -185,9 +185,51 @@ export function ProductsSection() {
         setTimeout(() => setIsSubmitted(false), 300);
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const [isError, setIsError] = useState(false);
+
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsSubmitted(true);
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            company: formData.get('company'),
+            location: formData.get('location'),
+            product: PRODUCTS[activeTab].label,
+        };
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/download`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                setIsSubmitted(true);
+                setIsError(false);
+
+                // Auto-trigger download for specific products
+                const productId = PRODUCTS[activeTab].id;
+                if (productId === 'zeconnect') {
+                    const link = document.createElement('a');
+                    link.href = '/ZeConnect_Setup.exe';
+                    link.download = 'ZeConnect_Setup.exe';
+                    link.click();
+                } else if (productId === 'zefacility') {
+                    const link = document.createElement('a');
+                    link.href = '/ZeFacility_Setup.exe';
+                    link.download = 'ZeFacility_Setup.exe';
+                    link.click();
+                }
+            } else {
+                setIsError(true);
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            setIsError(true);
+        }
     };
 
     const setActiveTab = (index: number) => {
@@ -406,7 +448,7 @@ export function ProductsSection() {
                                     <button
                                         className="ps-download-btn btn-zestine"
                                         onClick={() => {
-                                            if (p.id === 'zemanage' || p.id === 'zediag') {
+                                            if (p.id === 'zediag') {
                                                 gsap.to(window, { duration: 1.2, scrollTo: '#contact', ease: 'power2.inOut' });
                                             } else {
                                                 openModal();
@@ -476,12 +518,13 @@ export function ProductsSection() {
 
                                 <form className="ps-modal-form" onSubmit={handleFormSubmit}>
                                     <div className="ps-form-group">
-                                        <input type="text" placeholder="Name" required className="ps-form-input" />
+                                        <input name="name" type="text" placeholder="Name *" required className="ps-form-input" />
                                     </div>
                                     <div className="ps-form-group">
                                         <input 
+                                            name="email"
                                             type="email" 
-                                            placeholder="Email" 
+                                            placeholder="Email *" 
                                             required 
                                             className="ps-form-input"
                                             onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('please enter proper email')}
@@ -489,11 +532,15 @@ export function ProductsSection() {
                                         />
                                     </div>
                                     <div className="ps-form-group">
-                                        <input type="text" placeholder="Company" required className="ps-form-input" />
+                                        <input name="phone" type="tel" placeholder="Phone Number *" required className="ps-form-input" />
                                     </div>
                                     <div className="ps-form-group">
-                                        <input type="text" placeholder="Location" required className="ps-form-input" />
+                                        <input name="company" type="text" placeholder="Company *" required className="ps-form-input" />
                                     </div>
+                                    <div className="ps-form-group">
+                                        <input name="location" type="text" placeholder="Location *" required className="ps-form-input" />
+                                    </div>
+                                    {isError && <p className="ps-form-error">Failed to send request. Please try again.</p>}
                                     <button type="submit" className="ps-form-submit btn-zestine">
                                         Submit
                                     </button>
@@ -514,9 +561,25 @@ export function ProductsSection() {
                                         ? `Thank you. Our team will contact you soon with more details about ${PRODUCTS[activeTab].label}.`
                                         : `Thank you. We have received your request for ${PRODUCTS[activeTab].label} and will get back to you shortly.`}
                                 </p>
-                                <button className="ps-form-submit btn-zestine" onClick={closeModal} style={{ marginTop: '2rem' }}>
+                                <button 
+                                    className="ps-form-submit btn-zestine" 
+                                    onClick={closeModal} 
+                                    style={{ marginTop: '2rem' }}
+                                >
                                     Okay
                                 </button>
+
+                                {(PRODUCTS[activeTab].id === 'zeconnect' || PRODUCTS[activeTab].id === 'zefacility') && (
+                                    <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#64748b' }}>
+                                        Didn't start? <a 
+                                            href={PRODUCTS[activeTab].id === 'zeconnect' ? '/ZeConnect_Setup.exe' : '/ZeFacility_Setup.exe'} 
+                                            download 
+                                            style={{ color: '#ef4444', textDecoration: 'underline' }}
+                                        >
+                                            Click here to download manually
+                                        </a>
+                                    </p>
+                                )}
                             </div>
                         )}
                     </div>

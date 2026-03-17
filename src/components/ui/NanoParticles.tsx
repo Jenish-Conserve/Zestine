@@ -8,6 +8,8 @@ interface Particle {
   y: number
   baseX: number
   baseY: number
+  vx: number
+  vy: number
   size: number
   opacity: number
   offsetX: number
@@ -34,8 +36,10 @@ export default function NanoParticles() {
         y: y,
         baseX: x,
         baseY: y,
-        size: Math.random() * 1.2 + 0.5, // Reduced for smaller particles
-        opacity: Math.random() * 0.6 + 0.2,
+        vx: (Math.random() - 0.5) * 2.0 + 0.5, // Significantly faster
+        vy: (Math.random() - 0.5) * 2.0 + 0.3,
+        size: Math.random() * 2.0 + 1.0, // Larger for visibility
+        opacity: Math.random() * 0.4 + 0.4, // More opaque base
         offsetX: 0,
         offsetY: 0,
         speedFactor: Math.random() * 0.5 + 0.5,
@@ -66,7 +70,6 @@ export default function NanoParticles() {
     const resizeCanvas = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
-      // Re-initialize particles on resize to fill screen
       const particleCount = 600
       particlesRef.current = Array.from({ length: particleCount }, (_, i) => {
         const x = Math.random() * canvas.width
@@ -77,8 +80,10 @@ export default function NanoParticles() {
           y: y,
           baseX: x,
           baseY: y,
-          size: Math.random() * 1.2 + 0.5,
-          opacity: Math.random() * 0.6 + 0.2,
+          vx: (Math.random() - 0.5) * 2.0 + 0.5,
+          vy: (Math.random() - 0.5) * 2.0 + 0.3,
+          size: Math.random() * 2.0 + 1.0,
+          opacity: Math.random() * 0.4 + 0.4,
           offsetX: 0,
           offsetY: 0,
           speedFactor: Math.random() * 0.5 + 0.5,
@@ -93,36 +98,39 @@ export default function NanoParticles() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Calculate mouse direction
+      const time = Date.now() * 0.001
       const mouseDx = mousePos.current.x - prevMousePos.current.x
       const mouseDy = mousePos.current.y - prevMousePos.current.y
 
       particlesRef.current.forEach((particle) => {
-        // ── Smooth Movement Parameters ──
-        // multiplier determines the base range of movement
-        // lerpFactor determines the base speed/smoothness
-        const baseMultiplier = 20 
-        const baseLerpFactor = 0.0015 
+        // ── Autonomous Flow ──
+        particle.baseX += particle.vx
+        particle.baseY += particle.vy
 
-        // Target offset based on mouse direction + individual range variation
+        // ── Smooth Mouse Reaction ──
+        const baseMultiplier = 20 // Reverted to higher value for more response
+        const baseLerpFactor = 0.0015 // Faster follow
+
         const targetOffsetX = mouseDx * baseMultiplier * particle.rangeFactor
         const targetOffsetY = mouseDy * baseMultiplier * particle.rangeFactor
 
-        // Smoothly interpolate to target offset + individual speed variation
         particle.offsetX += (targetOffsetX - particle.offsetX) * baseLerpFactor * particle.speedFactor
         particle.offsetY += (targetOffsetY - particle.offsetY) * baseLerpFactor * particle.speedFactor
 
-        // Actual position
-        const x = particle.baseX + particle.offsetX
-        const y = particle.baseY + particle.offsetY
+        // ── Constant Circular "Swim" ──
+        // Much faster (2.5) and larger (40) motion
+        const swimX = Math.sin(time * 2.5 + particle.id) * 40 * particle.rangeFactor
+        const swimY = Math.cos(time * 2.5 + particle.id) * 40 * particle.rangeFactor
 
-        // Wrap around screen seamlessly
+        const x = particle.baseX + particle.offsetX + swimX
+        const y = particle.baseY + particle.offsetY + swimY
+
+        // Wrap around screen
         if (x < -100) particle.baseX += canvas.width + 200
         if (x > canvas.width + 100) particle.baseX -= canvas.width + 200
         if (y < -100) particle.baseY += canvas.height + 200
         if (y > canvas.height + 100) particle.baseY -= canvas.height + 200
 
-        // Draw particle
         ctx.fillStyle = `rgba(0, 0, 0, ${particle.opacity})`
         ctx.beginPath()
         ctx.arc(x, y, particle.size, 0, Math.PI * 2)

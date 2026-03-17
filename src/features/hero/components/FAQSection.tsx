@@ -14,6 +14,40 @@ const faqs = [
 export function FAQSection() {
     const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isError, setIsError] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            company: formData.get('company'),
+            requirements: formData.get('requirements'),
+        };
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                setIsSubmitted(true);
+                setIsError(false);
+                (e.target as HTMLFormElement).reset();
+            } else {
+                setIsError(true);
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            setIsError(true);
+        }
+    };
+
     const toggleFaq = (id: number) => {
         setActiveFaq(activeFaq === id ? null : id);
     };
@@ -55,25 +89,35 @@ export function FAQSection() {
                 <div className="faq-right">
                     <div className="contact-form-card">
                         <h3 className="form-title">Get Started with Zestine</h3>
-                        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-                            <input type="text" placeholder="Name *" required />
-                            <input 
-                                type="email" 
-                                placeholder="Email *" 
-                                required 
-                                onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('please enter proper email')}
-                                onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
-                            />
-                            <input type="tel" placeholder="Phone Number" />
-                            <input type="text" placeholder="Company Name *" required />
-                            <textarea placeholder="Tell us about your requirements / problems" rows={4} required></textarea>
-                            <p className="form-privacy-notice">Your information is safe with us. We respect your privacy and never spam.</p>
-                            <div className="form-submit-wrapper">
-                                <button type="submit" className="form-submit-btn btn-zestine">
-                                    Submit
-                                </button>
+                        {isSubmitted ? (
+                            <div className="form-success">
+                                <h3>Thank You!</h3>
+                                <p>Your message has been sent successfully. We'll get back to you soon.</p>
+                                <button className="btn-zestine" onClick={() => setIsSubmitted(false)}>Send Another</button>
                             </div>
-                        </form>
+                        ) : (
+                            <form className="contact-form" onSubmit={handleSubmit}>
+                                <input name="name" type="text" placeholder="Name *" required />
+                                <input 
+                                    name="email"
+                                    type="email" 
+                                    placeholder="Email *" 
+                                    required 
+                                    onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('please enter proper email')}
+                                    onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+                                />
+                                <input name="phone" type="tel" placeholder="Phone Number *" required />
+                                <input name="company" type="text" placeholder="Company Name *" required />
+                                <textarea name="requirements" placeholder="Tell us about your requirements / problems" rows={4} required></textarea>
+                                {isError && <p className="form-error-text">Failed to send message. Please try again.</p>}
+                                <p className="form-privacy-notice">Your information is safe with us. We respect your privacy and never spam.</p>
+                                <div className="form-submit-wrapper">
+                                    <button type="submit" className="form-submit-btn btn-zestine">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        )}
                     </div>
                 </div>
 
