@@ -264,6 +264,19 @@ export function ProductsSection() {
         }
     };
 
+    // External navigation support
+    useEffect(() => {
+        const handleExternalNav = (e: Event) => {
+            const customEvent = e as CustomEvent<{ index: number }>;
+            if (customEvent.detail && typeof customEvent.detail.index === 'number') {
+                handleTabClick(customEvent.detail.index);
+            }
+        };
+
+        window.addEventListener('zestine-navigate-product', handleExternalNav);
+        return () => window.removeEventListener('zestine-navigate-product', handleExternalNav);
+    }, []); // handleTabClick is stable enough as it uses refs
+
     useGSAP(() => {
         if (!wrapperRef.current || !stickyRef.current) return;
 

@@ -76,31 +76,19 @@ export function Footer() {
                         <nav className="footer-nav">
                             <a href="#products" onClick={(e) => {
                                 e.preventDefault();
-                                const element = document.getElementById('products');
-                                if (element) {
-                                    element.scrollIntoView({ behavior: 'smooth' });
-                                }
+                                window.dispatchEvent(new CustomEvent('zestine-navigate-product', { detail: { index: 0 } }));
                             }}>ZeManage</a>
                             <a href="#products" onClick={(e) => {
                                 e.preventDefault();
-                                const element = document.getElementById('products');
-                                if (element) {
-                                    element.scrollIntoView({ behavior: 'smooth' });
-                                }
+                                window.dispatchEvent(new CustomEvent('zestine-navigate-product', { detail: { index: 1 } }));
                             }}>ZeFacility</a>
                             <a href="#products" onClick={(e) => {
                                 e.preventDefault();
-                                const element = document.getElementById('products');
-                                if (element) {
-                                    element.scrollIntoView({ behavior: 'smooth' });
-                                }
+                                window.dispatchEvent(new CustomEvent('zestine-navigate-product', { detail: { index: 2 } }));
                             }}>ZeConnect</a>
                             <a href="#products" onClick={(e) => {
                                 e.preventDefault();
-                                const element = document.getElementById('products');
-                                if (element) {
-                                    element.scrollIntoView({ behavior: 'smooth' });
-                                }
+                                window.dispatchEvent(new CustomEvent('zestine-navigate-product', { detail: { index: 3 } }));
                             }}>ZeDiag</a>
                         </nav>
                     </div>
