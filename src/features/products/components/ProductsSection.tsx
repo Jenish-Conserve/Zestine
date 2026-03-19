@@ -449,7 +449,7 @@ export function ProductsSection() {
                                         className="ps-download-btn btn-zestine"
                                         onClick={() => {
                                             if (p.id === 'zediag') {
-                                                window.location.href = 'http://www.zestinetech.com/products/zediag';
+                                                window.location.href = 'https://zediag.zestinetech.com';
                                             } else {
                                                 openModal();
                                             }
